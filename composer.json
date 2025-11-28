@@ -1,0 +1,27 @@
+{
+
+    "require": {
+        "twig/twig": "^3.0",
+        "twitter/bootstrap": "^5.1",
+        "phpmailer/phpmailer": "^6.8",
+        "doctrine/instantiator": "1.5.0",
+        "aws/aws-sdk-php": "^3.280",
+        "vlucas/phpdotenv": "^5.6",
+        "tecnickcom/tcpdf": "^6.7",
+        "rollbar/rollbar": "^4.0",
+        "guzzlehttp/guzzle": "^7.0",
+        "league/flysystem": "^3.28",
+        "convertapi/convertapi-php": "^2.0",
+        "ticketpark/htmlphpexcel": "*"
+    },
+    "autoload": {
+        "psr-4": {
+             "Core\\": "Core/",
+             "App\\": "App/" 
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "symfony/var-dumper": "^7.2"
+    }
+}
