@@ -39,3 +39,23 @@ temp/
 **/myenv/**
 *.pyc
 __pycache__/
+
+# Docker files (optional - uncomment if you want to track them)
+# docker-compose.yml
+# dockerfile
+# docker/
+
+# Build tools
+gulpfile.js
+yarn.lock
+
+# PHP configuration
+php.ini
+
+# Testing
+phpunit.xml
+phpunit.md
+
+# Large asset files
+public/assets/css/bootstrap/
+public/assets/dist/
