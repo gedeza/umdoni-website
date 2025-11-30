@@ -16,6 +16,7 @@ use App\Models\UserModel;
 use App\Models\RolesModel;
 use Aws\Exception\AwsException;
 use App\Models\LogsModel;
+use Components\UserFriendlyErrors;
 
 
 class Authentication extends \Core\Controller
@@ -106,7 +107,7 @@ public function __construct()
         redirect('authentication/login');
       }
     } catch (\Throwable $th) {
-      $_SESSION['error'] = ['message' => $th->getMessage()];
+      $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/login');
     }
   }
@@ -144,7 +145,7 @@ public function __construct()
         redirect('authentication/login');
       }
     } catch (\Throwable $th) {
-      $_SESSION['error'] = ['message' => $th->getMessage()];
+      $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/login');
     }
   }
@@ -179,8 +180,8 @@ public function __construct()
         }
       
     } catch (\Throwable  $aw) {
-      $errMsg = $aw->getMessage();  
-        $_SESSION['error'] = ['message'=>$errMsg];
+      $errMsg = $aw->getMessage();
+        $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($errMsg)];
 
       redirect('authentication/login');
     }
@@ -228,7 +229,7 @@ public function __construct()
         $exists = Profile::getUser($data);
         if (!empty($exists)) {
         $user = UserModel::Save($data);
-        $_SESSION['success'] = ['message' => 'Registration Successfull, please find your authentication code in your email inbox'];
+        $_SESSION['success'] = ['message' => 'Welcome! Please check your email for a verification code to activate your account'];
         } else {
           $_SESSION['error'] = ['message' => 'This email already exists, please try resetting your password.'];
           return false;
@@ -238,7 +239,7 @@ public function __construct()
       redirect('authentication/code');
     } catch (\Throwable $th) {
 
-      $_SESSION['error'] = ['message' => $th->getMessage()];
+      $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/signup');
     }
   }
@@ -269,10 +270,10 @@ public function __construct()
         $data['status'] = true;
         $confirm = UserModel::VerifyeUser($data);
       }
-      $_SESSION['success'] = ['message' => 'You have been verified'];
+      $_SESSION['success'] = ['message' => 'Your account has been verified! You can now login'];
       redirect('authentication/login');
     } catch (\Throwable $th) {
-      $_SESSION['error'] = ['message' => $th->getMessage()];
+      $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/code');
     }
   }
@@ -306,7 +307,7 @@ public function __construct()
       $_SESSION['success'] = ['message' => 'You have been verified'];
       redirect('authentication/login');
     } catch (\Throwable $th) {
-      $_SESSION['error'] = ['message' => $th->getMessage()];
+      $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/code');
     }
   }

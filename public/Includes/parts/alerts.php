@@ -1,40 +1,55 @@
-<div id="alert" class="row  d-flex justify-content-center">
 <?php
 if (isset($_SESSION['error'])) {
-    $text = 'danger';
+    $errorMessage = $_SESSION['error']['message'];
 ?>
-
-        <div class="col-md-8">
-            <div class="alert alert-light-danger alert-danger color-danger text-center" role="alert">
-                <p class="text-<?php echo $text ?> fw-normal">
-                <?php echo  $_SESSION['error']['message']; ?>
-                </p>
-            </div>
-        </div>
-    <?php
-} else if (isset($_SESSION['success'])) {
-    $text = 'success';
-    ?>
-        <div class="col-md-8">
-            <div class="alert alert-light-success alert-success color-success" role="alert">
-              
-                <p class="text-<?php echo $text ?> fw-normal">
-                <?php echo $_SESSION['success']['message']; ?>
-</p>
-            </div>
-        </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Toastify({
+                text: "<?php echo htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8'); ?>",
+                duration: 8000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                style: {
+                    background: "#f44336",
+                    color: "#ffffff",
+                    fontSize: "16px",
+                    padding: "16px 24px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
+                }
+            }).showToast();
+        });
+    </script>
 <?php
+    unset($_SESSION['error']);
 }
-unset($_SESSION['success']);
-unset($_SESSION['error']);
-?>
-</div>
-<script>
-     document.addEventListener("DOMContentLoaded", function() {
-    var alert = document.getElementById("alert");
-    setTimeout(function() {
-      alert.classList.add("visually-hidden");
-    }, 6000);
 
-})
-</script>
+if (isset($_SESSION['success'])) {
+    $successMessage = $_SESSION['success']['message'];
+?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Toastify({
+                text: "<?php echo htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8'); ?>",
+                duration: 8000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                style: {
+                    background: "#4CAF50",
+                    color: "#ffffff",
+                    fontSize: "16px",
+                    padding: "16px 24px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
+                }
+            }).showToast();
+        });
+    </script>
+<?php
+    unset($_SESSION['success']);
+}
+?>
