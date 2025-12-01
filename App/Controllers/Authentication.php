@@ -225,7 +225,7 @@ public function __construct()
         $data['locked'] = 1;
         $data['role_id'] = 2;
         $data['UserSub'] = $result['UserSub'];
- 
+
         $exists = Profile::getUser($data);
         if (!empty($exists)) {
         $user = UserModel::Save($data);
@@ -238,7 +238,6 @@ public function __construct()
 
       redirect('authentication/code');
     } catch (\Throwable $th) {
-
       $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/signup');
     }
