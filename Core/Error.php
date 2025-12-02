@@ -1,8 +1,6 @@
 <?php
 
 namespace Core;
-use Rollbar\Rollbar;
-use Rollbar\Payload\Level;
 /**
  * Error and exception handler
  *
@@ -63,10 +61,6 @@ class Error
             $message .= "\nThrown in '" . $exception->getFile() . "' on line " . $exception->getLine();
             error_log($message);
             echo $message;
-             Rollbar::log(Level::INFO, $message);
-        
-    
- 
         }
     }
 }

@@ -107,6 +107,11 @@ public function __construct()
         redirect('authentication/login');
       }
     } catch (\Throwable $th) {
+      // Log technical error to database
+      LogsModel::LogError('Password Reset Request Failed: ' . $th->getMessage(), 'error', [
+        'username' => $data['username'] ?? 'Unknown'
+      ]);
+
       $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/login');
     }
@@ -145,6 +150,11 @@ public function __construct()
         redirect('authentication/login');
       }
     } catch (\Throwable $th) {
+      // Log technical error to database
+      LogsModel::LogError('Password Reset Confirmation Failed: ' . $th->getMessage(), 'error', [
+        'username' => $data['username'] ?? 'Unknown'
+      ]);
+
       $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/login');
     }
@@ -181,8 +191,13 @@ public function __construct()
       
     } catch (\Throwable  $aw) {
       $errMsg = $aw->getMessage();
-        $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($errMsg)];
 
+      // Log technical error to database
+      LogsModel::LogError('Authentication Failed: ' . $errMsg, 'error', [
+        'username' => $data['username'] ?? $data['email'] ?? 'Unknown'
+      ]);
+
+      $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($errMsg)];
       redirect('authentication/login');
     }
   }
@@ -238,6 +253,12 @@ public function __construct()
 
       redirect('authentication/code');
     } catch (\Throwable $th) {
+      // Log technical error to database
+      LogsModel::LogError('User Registration Failed: ' . $th->getMessage(), 'error', [
+        'username' => $data['username'] ?? 'Unknown',
+        'email' => $data['email'] ?? 'Unknown'
+      ]);
+
       $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/signup');
     }
@@ -272,6 +293,11 @@ public function __construct()
       $_SESSION['success'] = ['message' => 'Your account has been verified! You can now login'];
       redirect('authentication/login');
     } catch (\Throwable $th) {
+      // Log technical error to database
+      LogsModel::LogError('Email Verification Failed: ' . $th->getMessage(), 'error', [
+        'username' => $data['username'] ?? 'Unknown'
+      ]);
+
       $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/code');
     }
@@ -306,6 +332,11 @@ public function __construct()
       $_SESSION['success'] = ['message' => 'You have been verified'];
       redirect('authentication/login');
     } catch (\Throwable $th) {
+      // Log technical error to database
+      LogsModel::LogError('Password Update Failed: ' . $th->getMessage(), 'error', [
+        'username' => $data['username'] ?? 'Unknown'
+      ]);
+
       $_SESSION['error'] = ['message' => UserFriendlyErrors::translate($th->getMessage())];
       redirect('authentication/code');
     }

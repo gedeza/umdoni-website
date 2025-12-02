@@ -13,8 +13,6 @@ use Components\Context;
 
 use Dotenv\Dotenv;
 
-use Rollbar\Rollbar;
-use Rollbar\Payload\Level;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
@@ -52,22 +50,8 @@ error_reporting(E_ALL);
 set_error_handler('Core\Error::errorHandler');
 set_exception_handler('Core\Error::exceptionHandler');
 
-
 /**
- * Error handling with Rollbar
- * 
- */
-
-
-Rollbar::init(
-    array(
-        'access_token' => 'c3778305cc8e4f098be08bed6f958273',
-        'environment' => 'local'
-    )
-);
-
-/**
- * get helper function
+ * Load environment variables
  */
 try {
     $dotenv = Dotenv::createImmutable('../');
