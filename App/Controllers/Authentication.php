@@ -346,7 +346,10 @@ public function __construct()
   {
     global $context;
 
-    LogsModel::UserLogout($_SESSION['profile']);
+    // Only log logout if session profile exists
+    if (isset($_SESSION['profile']) && !empty($_SESSION['profile'])) {
+        LogsModel::UserLogout($_SESSION['profile']);
+    }
 
     session_destroy();
     $logout = new Context();
