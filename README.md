@@ -45,6 +45,11 @@ The Umdoni Municipality website serves as the primary digital platform for citiz
 - Content Management (News, Events, Documents)
 - Service Request Management
 - Tender & RFP Administration
+- Activity Logs with Error Tracking (NEW)
+  - Real-time error monitoring
+  - Authentication workflow tracking
+  - Filter by log type (login, logout, error, warning)
+  - IP address and user agent tracking
 - Analytics & Reporting
 - Role-Based Access Control
 
@@ -66,7 +71,7 @@ The Umdoni Municipality website serves as the primary digital platform for citiz
 ### Infrastructure
 - **AWS Cognito** - User authentication & authorization
 - **AWS S3** - Document storage
-- **Rollbar** - Error tracking & monitoring
+- **Database Error Logging** - Built-in error tracking & monitoring
 - **Google Analytics** - Website analytics
 
 ### Development Tools
@@ -184,5 +189,14 @@ This project is proprietary software owned by Umdoni Local Municipality.
 
 ## Credits
 
+### Development Team
 - **Framework Development:** Rakheoana Lefela
+- **Additional Development:** Sibongamandla
+- **Recent Enhancements:** Nhlanhla
+  - Activity Logs with Error Tracking
+  - User-Friendly Error Messages
+  - Security Enhancements
+  - Dashboard Improvements
+
+### Organization
 - **Municipality:** Umdoni Local Municipality, KwaZulu-Natal, South Africa
