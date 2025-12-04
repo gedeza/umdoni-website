@@ -127,7 +127,7 @@ class Tenders extends \Core\Controller
         $data = $_POST;
         $locked = [
             'false' => '0',
-            'true' => '1'
+            'true' => '1' 
         ];
         $data['locked'] = $locked[$data['locked']];
         $data['updatedAt'] = date("Y-m-d H:i:s");
@@ -136,25 +136,6 @@ class Tenders extends \Core\Controller
             $_SESSION['success'] = ['message' => 'successfully updated record!'];
         } catch (\Throwable $th) {
             echo $th->getMessage();
-        }
-        redirect('dashboard/tenders/index');
-    }
-
-    /**
-     * Manually archive expired tenders
-     * This action can be triggered by admin to archive all expired tenders
-     */
-    public function archiveExpiredAction()
-    {
-        try {
-            $count = TenderModel::ArchiveExpired();
-            if ($count > 0) {
-                $_SESSION['success'] = ['message' => "Successfully archived {$count} expired tender(s)!"];
-            } else {
-                $_SESSION['info'] = ['message' => 'No expired tenders to archive.'];
-            }
-        } catch (\Throwable $th) {
-            $_SESSION['error'] = ['message' => 'Error archiving tenders: ' . $th->getMessage()];
         }
         redirect('dashboard/tenders/index');
     }

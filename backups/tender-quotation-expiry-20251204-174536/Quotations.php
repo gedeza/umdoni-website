@@ -8,11 +8,11 @@
 namespace App\Controllers;
 
 use \Core\View;
-use App\Models\TenderModel;
+use App\Models\QuotationsModel;
 
  
 
-class Tenders extends \Core\Controller
+class Quotations extends \Core\Controller
 {
   /**
      * Before filter
@@ -24,17 +24,9 @@ class Tenders extends \Core\Controller
     }
 
     public function indexAction()
-    {
-        // Use GetActive() to show only non-expired tenders
-        $tenders = TenderModel::GetActive();
-        view::render('tenders/index.php', $tenders, 'default');
-    }
-
-    public function archiveAction()
-    {
-        // Show archived (expired) tenders
-        $tenders = TenderModel::GetArchived();
-        view::render('tenders/archive.php', $tenders, 'default');
+    {  
+        $quotations = QuotationsModel::getAll();
+        view::render('quotations/index.php', $quotations, 'default');
     }
 
   

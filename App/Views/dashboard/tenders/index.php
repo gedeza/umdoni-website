@@ -47,6 +47,9 @@ $crumbs = getCrumbs();
                     <button class="btn  btn-sm" onclick="handleDownload()">
                         <i class="bi bi-download"></i> Save
                     </button>
+                    <a class="btn btn-warning btn-sm" href="<?php echo buildurl("dashboard/tenders/archiveExpired") ?>" role="button" onclick="return confirm('Archive all expired tenders? This will update their status to Archived.')">
+                        <i class="bi bi-archive"></i> Archive Expired
+                    </a>
                 </div>
             </div>
             <div class="card-content">

@@ -49,6 +49,9 @@ $crumbs = getCrumbs();
                     <button class="btn  btn-sm">
                         <i class="bi bi-download"></i> Save
                     </button>
+                    <a class="btn btn-warning btn-sm" href="<?php echo buildurl("dashboard/quotations/archiveExpired") ?>" role="button" onclick="return confirm('Archive all expired quotations? This will update their status to Archived.')">
+                        <i class="bi bi-archive"></i> Archive Expired
+                    </a>
                 </div>
             </div>
             <div class="card-content">

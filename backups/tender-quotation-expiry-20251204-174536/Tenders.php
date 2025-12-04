@@ -25,16 +25,8 @@ class Tenders extends \Core\Controller
 
     public function indexAction()
     {
-        // Use GetActive() to show only non-expired tenders
-        $tenders = TenderModel::GetActive();
+        $tenders = TenderModel::Get();
         view::render('tenders/index.php', $tenders, 'default');
-    }
-
-    public function archiveAction()
-    {
-        // Show archived (expired) tenders
-        $tenders = TenderModel::GetArchived();
-        view::render('tenders/archive.php', $tenders, 'default');
     }
 
   

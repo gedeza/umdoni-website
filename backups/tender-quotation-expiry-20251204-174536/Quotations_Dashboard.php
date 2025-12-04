@@ -143,32 +143,13 @@ public static function getStatusName($status)
     public function deleteAction()
     {
         $id = $_GET['id'];
-        try
+        try 
         {
             QuotationsModel::Delete($id);
-
-        } catch (\Throwable $th)
+          
+        } catch (\Throwable $th) 
         {
             echo $th->getMessage();
-        }
-        redirect('dashboard/quotations/index');
-    }
-
-    /**
-     * Manually archive expired quotations
-     * This action can be triggered by admin to archive all expired quotations
-     */
-    public function archiveExpiredAction()
-    {
-        try {
-            $count = QuotationsModel::ArchiveExpired();
-            if ($count > 0) {
-                $_SESSION['success'] = ['message' => "Successfully archived {$count} expired quotation(s)!"];
-            } else {
-                $_SESSION['info'] = ['message' => 'No expired quotations to archive.'];
-            }
-        } catch (\Throwable $th) {
-            $_SESSION['error'] = ['message' => 'Error archiving quotations: ' . $th->getMessage()];
         }
         redirect('dashboard/quotations/index');
     }

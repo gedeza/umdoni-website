@@ -24,9 +24,17 @@ class Quotations extends \Core\Controller
     }
 
     public function indexAction()
-    {  
-        $quotations = QuotationsModel::getAll();
+    {
+        // Use GetActive() to show only non-expired quotations
+        $quotations = QuotationsModel::GetActive();
         view::render('quotations/index.php', $quotations, 'default');
+    }
+
+    public function archiveAction()
+    {
+        // Show archived (expired) quotations
+        $quotations = QuotationsModel::GetArchived();
+        view::render('quotations/archive.php', $quotations, 'default');
     }
 
   
