@@ -128,29 +128,52 @@ class Profile extends \Core\Repository
      static function Authenticate($profile, $aData)
     {
         global $context;
-        try{
-            
-            if($aData['password'] === $profile[0]['password']){
-                $context->isLoggedIn = true;
-            }
-            if(!empty($profile[0]['access_token'])){
+
+        try {
+            // 1. Check if account is locked FIRST
+            if ($profile[0]["locked"] == '1') {
                 $context->isLoggedIn = false;
-                return false;
+                throw new Exception("Account is locked. Please contact administrator.");
             }
-            if ($profile[0]["locked"] == '1' ) 
-            {   
+
+            // 2. Check if access_token exists (OAuth/Cognito user)
+            if (!empty($profile[0]['access_token'])) {
                 $context->isLoggedIn = false;
-                return false;
+                throw new Exception("Please use OAuth authentication for this account.");
             }
-            else
-            {
-               $logId = LogsModel::Save($profile[0]);
-               $profile[0]['log_id'] = $logId;
-                $_SESSION['profile'] = $profile[0];
-                setcookie("auth", md5($profile[0]['password']), time() + 3600 * 30, '/');
-                return true;
+
+            // 3. CRITICAL: Validate password BEFORE allowing access
+            if ($aData['password'] !== $profile[0]['password']) {
+                $context->isLoggedIn = false;
+
+                // Log failed login attempt to database
+                LogsModel::LogError(
+                    'Failed login attempt for user: ' . $profile[0]['username'],
+                    'error',
+                    [
+                        'userId' => $profile[0]['user_id'] ?? 'unknown',
+                        'username' => $profile[0]['username'] ?? 'unknown',
+                        'email' => $profile[0]['email'] ?? 'unknown'
+                    ]
+                );
+
+                throw new Exception("Invalid username or password.");
             }
-        }catch (PDOException $e) {
+
+            // 4. Password is correct - proceed with login
+            $context->isLoggedIn = true;
+
+            // 5. Create activity log entry
+            $logId = LogsModel::Save($profile[0]);
+            $profile[0]['log_id'] = $logId;
+
+            // 6. Set session and cookie
+            $_SESSION['profile'] = $profile[0];
+            setcookie("auth", md5($profile[0]['password']), time() + 3600 * 30, '/');
+
+            return true;
+
+        } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
