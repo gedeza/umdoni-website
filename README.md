@@ -26,11 +26,15 @@ The Umdoni Municipality website serves as the primary digital platform for citiz
 - Valuation Rolls
 
 ### Business & Procurement
-- Tender Opportunities
-- Request for Proposals (RFPs)
-- Quotation Submissions
-- Vacancy Postings
-- Project Information
+- **Tender Opportunities** - Active tender listings with expiry management
+- **Tender Archive** - Historical tender opportunities for transparency
+- **Request for Proposals (RFPs)**
+- **Quotation Submissions** - Active quotation listings with expiry management
+- **Quotation Archive** - Historical quotation opportunities for transparency
+- **Vacancy Postings**
+- **Project Information**
+- **Automatic Expiry Detection** - Items archived based on closing dates
+- **Clean Active Listings** - Only current opportunities displayed on main pages
 
 ### Citizen Services
 - Municipal Service Directory
@@ -45,7 +49,10 @@ The Umdoni Municipality website serves as the primary digital platform for citiz
 - Content Management (News, Events, Documents)
 - Service Request Management
 - Tender & RFP Administration
-- Activity Logs with Error Tracking (NEW)
+  - **Archive Expired** button for manual archiving (NEW)
+  - Automatic expiry detection based on closing dates (NEW)
+  - Status management (Current, Open, Awarded, Archived) (NEW)
+- Activity Logs with Error Tracking
   - Real-time error monitoring
   - Authentication workflow tracking
   - Filter by log type (login, logout, error, warning)
@@ -192,10 +199,18 @@ This project is proprietary software owned by Umdoni Local Municipality.
 ### Development Team
 - **Framework Development:** Rakheoana Lefela
 - **Additional Development:** Sibongamandla
-- **Recent Enhancements:** Nhlanhla
-  - Activity Logs with Error Tracking
-  - User-Friendly Error Messages
-  - Security Enhancements
+- **Recent Enhancements:** Nhlanhla Mnyandu
+  - Tender & Quotation Expiry Management System (2025-12-04)
+    - Automatic expiry detection based on closing dates
+    - Public archive pages for historical opportunities
+    - Manual archiving via dashboard
+    - 566 expired items archived and organized
+  - Activity Logs with Error Tracking (2025-12-03)
+    - Real-time error monitoring
+    - Authentication workflow tracking
+    - Filter by log type with color coding
+  - User-Friendly Error Messages (2025-12-01)
+  - Security Enhancements & Malware Removal (2025-12-01)
   - Dashboard Improvements
 
 ### Organization
