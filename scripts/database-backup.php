@@ -18,6 +18,9 @@
  * @date 2025-12-04
  */
 
+// Set timezone to South Africa (SAST - UTC+2)
+date_default_timezone_set('Africa/Johannesburg');
+
 // Load configuration
 require_once __DIR__ . '/../App/Config.php';
 

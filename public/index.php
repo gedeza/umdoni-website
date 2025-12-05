@@ -51,6 +51,13 @@ set_error_handler('Core\Error::errorHandler');
 set_exception_handler('Core\Error::exceptionHandler');
 
 /**
+ * Timezone Configuration
+ * Set to Africa/Johannesburg (South Africa Standard Time - SAST)
+ * UTC+2 (no DST in South Africa)
+ */
+date_default_timezone_set('Africa/Johannesburg');
+
+/**
  * Load environment variables
  */
 try {
