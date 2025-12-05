@@ -107,6 +107,7 @@ $sidebarItems = [
     'hasSub' => true,
     'subItems' => [
       (object) ['label' => 'Activity Logs', 'url' => buildurl("dashboard/logs/index")],
+      (object) ['label' => 'Backups', 'url' => buildurl("dashboard/backups/index")],
       (object) ['label' => 'Roles', 'url' => buildurl("dashboard/roles/index")],
       (object) ['label' => 'Site Settings', 'url' => buildurl("dashboard/settings/index")],
       (object) ['label' => 'User Management', 'url' => buildurl("dashboard/users/index")],

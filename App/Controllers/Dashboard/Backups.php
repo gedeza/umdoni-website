@@ -37,7 +37,7 @@ class Backups extends \Core\Controller
         View::render('dashboard/backups/index.php', [
             'backups' => $backups,
             'stats' => $stats
-        ], 'dashboardLayout');
+        ], 'dashboard');
     }
 
     /**
