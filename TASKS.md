@@ -461,7 +461,7 @@ The uMdoni Municipality website had no automated backup system in place. Critica
   - [x] Activity Log timestamps verified: Showing correct SAST time
   - [x] Dashboard Backups page: Functional and accessible
   - [x] Logs directory created with proper permissions
-  - [x] Email notifications configured: `isu@umdoni.gov.za`
+  - [x] Email notifications configured: `lindokuhlec@umdoni.gov.za`
   - [ ] Monitor first automated backup (scheduled for 2:00 AM SAST tomorrow)
 
 #### Technical Implementation Details
@@ -613,7 +613,7 @@ Backups Controller (App/Controllers/Dashboard/Backups.php):
 - ✅ Manual backup: 417.28 KB → 66.3 KB (84% compression)
 - ✅ Activity Log: Correct SAST timestamps
 - ✅ Dashboard: Backups page functional
-- ✅ Email alerts: Configured to isu@umdoni.gov.za
+- ✅ Email alerts: Configured to lindokuhlec@umdoni.gov.za
 
 **Next Monitoring Steps:**
 1. Check logs tomorrow morning: `tail -f /home/umdonigov/public_html/logs/backup.log`
