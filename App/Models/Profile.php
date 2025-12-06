@@ -143,7 +143,29 @@ class Profile extends \Core\Repository
             }
 
             // 3. CRITICAL: Validate password BEFORE allowing access
-            if ($aData['password'] !== $profile[0]['password']) {
+            // Support both hashed (new) and plaintext (legacy) passwords
+            $passwordValid = false;
+
+            if (password_get_info($profile[0]['password'])['algo'] !== null) {
+                // Password is hashed - use password_verify()
+                $passwordValid = password_verify($aData['password'], $profile[0]['password']);
+            } else {
+                // Legacy plaintext password - direct comparison (temporary backward compatibility)
+                $passwordValid = ($aData['password'] === $profile[0]['password']);
+
+                // IMPORTANT: Re-hash legacy password on successful login
+                if ($passwordValid) {
+                    $hashedPassword = password_hash($aData['password'], PASSWORD_DEFAULT);
+                    $db = static::getDB();
+                    $sql = "UPDATE users SET `password` = :password WHERE `user_id` = :user_id";
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindParam(':password', $hashedPassword);
+                    $stmt->bindParam(':user_id', $profile[0]['user_id'], PDO::PARAM_INT);
+                    $stmt->execute();
+                }
+            }
+
+            if (!$passwordValid) {
                 $context->isLoggedIn = false;
 
                 // Log failed login attempt to database

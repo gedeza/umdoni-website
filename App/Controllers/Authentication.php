@@ -215,8 +215,8 @@ public function __construct()
       'version' => 'latest',
       'region'  => $region,
       'credentials' => [
-        'key'    => 'AKIA4Y2PS6FVQSB7BW6X',
-        'secret' => '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',
+        'key'    => $this->awsAccessKeyId,
+        'secret' => $this->awsSecretAccessKey,
       ],
     ]);
 

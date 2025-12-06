@@ -64,15 +64,62 @@ class Users extends \Core\Controller
         global $context;
 
         if(isset($_POST))   $data = $_POST;
-        try 
+
+        try
         {
-          $id =  UserModel::Save($data);
-            
-        } catch (\Throwable $th) 
+            // Validation for new user creation
+            if (!isset($data['user_id']) || empty($data['user_id'])) {
+                // Password validation
+                if (empty($data['password'])) {
+                    throw new \Exception("Password is required");
+                }
+
+                if (empty($data['confirm_password'])) {
+                    throw new \Exception("Password confirmation is required");
+                }
+
+                if ($data['password'] !== $data['confirm_password']) {
+                    throw new \Exception("Passwords do not match");
+                }
+
+                if (strlen($data['password']) < 8) {
+                    throw new \Exception("Password must be at least 8 characters");
+                }
+
+                // Role validation
+                if (empty($data['role_id'])) {
+                    throw new \Exception("User role is required");
+                }
+
+                // Email validation
+                if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    throw new \Exception("Valid email address is required");
+                }
+
+                // Map first_name/last_name to username/surname for UserModel
+                $data['username'] = $data['first_name'];
+                $data['surname'] = $data['last_name'];
+
+                // Set required fields with defaults
+                $data['createdAt'] = date("Y-m-d H:i:s");
+                $data['status'] = 1;  // 1 = active
+                $data['locked'] = 0;  // 0 = unlocked (account active)
+
+                // Remove confirm_password (not needed in database)
+                unset($data['confirm_password']);
+            }
+
+            // Save user
+            $id = UserModel::Save($data);
+
+            // Success message is set in UserModel::Save()
+
+        } catch (\Throwable $th)
         {
-            $_SESSION['errors'] = ['message' => $th->getMessage()];
+            $_SESSION['error'] = ['message' => $th->getMessage()];
         }
-        redirect('dashboard/users/list');
+
+        redirect('dashboard/users/index');
     }
 
     public function deleteAction()

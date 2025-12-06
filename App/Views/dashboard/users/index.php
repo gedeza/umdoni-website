@@ -33,10 +33,15 @@ use App\Models\RolesModel;
     <div class="col-md">
       <div class="card">
         <div class="card-header">
-          <p class="card-title fw-light">User List</p>
-          <div class="float-start float-lg-end">
-            <div class="card-content">
-              <?php include('Includes/parts/alerts.php') ?>
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="card-title fw-light mb-0">User List</p>
+            <div class="d-flex align-items-center gap-2">
+              <a href="<?php echo buildurl('dashboard/users/add'); ?>" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Create User
+              </a>
+              <div class="card-content">
+                <?php include('Includes/parts/alerts.php') ?>
+              </div>
             </div>
           </div>
         </div>

@@ -96,12 +96,29 @@ echo'<div class="col-xl-8 col-lg-7 mb-4">
                         <div class="col-md-6">
                             <div class="form-group ">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" value="'.$email.'">
+                                <input type="email" class="form-control" name="email" id="email" value="'.$email.'" required>
                             </div>
-                        </div>
+                        </div>';
 
+                        // Show password fields ONLY for create mode (no user_id)
+                        if (empty($user_id)) {
+                            echo '<div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password" id="password" required minlength="8">
+                                    <small class="form-text text-muted">Minimum 8 characters</small>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="confirm_password">Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" required minlength="8">
+                                </div>
+                            </div>';
+                        }
+
+                        echo '<div class="col-md-6">
                             <div class="form-group ">
                                 <label for="mobile_number">Phone Number</label>
                                 <input type="text" class="form-control" name="mobile_number" id="mobile_number" value="'.$mobile_number.'">
@@ -181,7 +198,27 @@ echo'<div class="col-xl-8 col-lg-7 mb-4">
                                 <label for="mobile_number">Postal Code</label>
                                 <input type="text" class="form-control" name="postal_code" id="postal_code" value="'.$postal_code.'">
                             </div>
+                        </div>';
+
+                        // Show role selector for create mode or admin editing
+                        use App\Models\RolesModel;
+                        $roles = RolesModel::getAll();
+                        $current_role = (isset($data['role_id'])) ? $data['role_id'] : '';
+
+                        echo '<div class="col-md-6">
+                            <div class="form-group">
+                                <label for="role_id">User Role <span class="text-danger">*</span></label>
+                                <select class="form-control" name="role_id" id="role_id" required>
+                                    <option value="">-- Select Role --</option>';
+                                    foreach ($roles as $role) {
+                                        $selected = ($current_role == $role['id']) ? 'selected' : '';
+                                        echo '<option value="'.$role['id'].'" '.$selected.'>'.$role['name'].'</option>';
+                                    }
+                                echo '</select>
+                                <small class="form-text text-muted">Assign user permissions level</small>
+                            </div>
                         </div>
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <button type="submit" name="submit-btn" class="btn btn-primary">Submit</button>
