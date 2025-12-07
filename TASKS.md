@@ -626,6 +626,188 @@ Backups Controller (App/Controllers/Dashboard/Backups.php):
 
 ---
 
+### Task #4: Admin User Creation & Security Hardening
+
+**Priority:** CRITICAL
+**Status:** 🔧 IN PROGRESS
+**Assigned:** Development Team
+**Start Date:** 2025-12-06
+**Expected Completion:** 2025-12-07
+
+#### Problem Statement
+The system lacked the ability for administrators to create user accounts directly from the dashboard. Additionally, critical security vulnerabilities were discovered during the implementation:
+- No admin interface for user creation (users could only self-register via AWS Cognito)
+- **CRITICAL:** SQL injection vulnerabilities in Profile.php (3 methods)
+- **CRITICAL:** users.password column only VARCHAR(45) - truncates bcrypt hashes (60 chars needed)
+- Password re-hashing on legacy password migration not saving properly
+- Dashboard user list badges showing incorrect status (strict type comparison issues)
+
+#### Objectives
+1. ✅ Create admin user creation interface in dashboard
+2. ✅ Implement comprehensive validation (password strength, email format, role assignment)
+3. 🔧 Fix SQL injection vulnerabilities in Profile.php
+4. 🔧 Fix users.password column length (VARCHAR 45 → 255)
+5. 🔧 Fix password re-hashing error handling
+6. 🔧 Fix user list badge display issues
+7. ✅ Security: All user inputs validated at system boundary
+8. ✅ Security: Password hashing for admin-created users
+
+#### Task Breakdown
+
+**Phase 1: User Creation Feature** ✅ COMPLETED (2025-12-06)
+- [x] 1.1 Update UserModel.php
+  - [x] Add password hashing in Save() method
+  - [x] Add email uniqueness validation
+  - [x] Convert all methods to prepared statements (SQL injection fix)
+  - [x] Add comprehensive error handling
+- [x] 1.2 Update Users controller (Dashboard/Users.php)
+  - [x] Add validation for new user creation
+  - [x] Password confirmation matching
+  - [x] Password strength requirements (min 8 characters)
+  - [x] Email format validation
+  - [x] Role validation
+  - [x] Field mapping (first_name → username, last_name → surname)
+- [x] 1.3 Update add.php view
+  - [x] Add password fields (create mode only)
+  - [x] Add role selector dropdown
+  - [x] Add required field indicators
+  - [x] Conditional field display based on create vs edit mode
+- [x] 1.4 Update index.php view
+  - [x] Add "Create User" button with icon
+  - [x] Improve card header layout
+
+**Phase 2: Security Fixes** 🔧 IN PROGRESS (2025-12-07)
+- [x] 2.1 Fix Profile.php SQL injection vulnerabilities
+  - [x] getUser() - Convert to prepared statement with LIKE parameter
+  - [x] getById() - Convert to prepared statement
+  - [ ] Save() - Convert to prepared statement (contact form method)
+- [ ] 2.2 Fix database schema issue
+  - [ ] Create migration SQL for users.password column (VARCHAR 45 → 255)
+  - [ ] Document rollback procedure
+  - [ ] Test on local database first
+- [ ] 2.3 Fix password re-hashing in Profile::Authenticate()
+  - [ ] Add error handling to UPDATE statement
+  - [ ] Add verification that hash was saved
+  - [ ] Add logging for hash upgrade failures
+- [ ] 2.4 Fix Dashboard/Users/index.php badge display
+  - [ ] Change strict === to loose == for database string comparisons
+  - [ ] Add null check for username display
+  - [ ] Test badge display with different user statuses
+
+**Phase 3: Testing & Deployment** ⏳ PENDING
+- [ ] 3.1 Local testing
+  - [ ] Test creating new user with valid data
+  - [ ] Test password validation (mismatched passwords, weak passwords)
+  - [ ] Test duplicate email detection
+  - [ ] Test role assignment
+  - [ ] Test legacy password login and upgrade
+  - [ ] Verify badge display shows correct status
+- [ ] 3.2 Create deployment package
+  - [ ] Package modified files
+  - [ ] Create database migration script
+  - [ ] Create deployment README
+  - [ ] Create rollback instructions
+- [ ] 3.3 Production deployment
+  - [ ] Backup production database
+  - [ ] Backup production files
+  - [ ] Run database migration
+  - [ ] Deploy code changes
+  - [ ] Test user creation on production
+  - [ ] Verify existing users can still login
+
+#### Technical Implementation Details
+
+**Security Vulnerabilities Fixed:**
+```php
+// BEFORE (VULNERABLE):
+$stmt = $db->query("SELECT * FROM users WHERE email LIKE '%$data%'");  // SQL injection!
+$sql = "INSERT INTO profile VALUES ('$data[name]', '$data[email]')";    // SQL injection!
+
+// AFTER (SECURE):
+$stmt = $db->prepare("SELECT * FROM users WHERE email LIKE :email");
+$stmt->bindParam(':email', $emailParam, PDO::PARAM_STR);
+$stmt->execute();
+```
+
+**Database Schema Fix:**
+```sql
+-- BEFORE: Truncates bcrypt hashes!
+password VARCHAR(45)
+
+-- AFTER: Supports full bcrypt hash (60 chars) + future algorithms
+password VARCHAR(255)
+```
+
+**Password Re-hashing Fix:**
+```php
+// Add error handling and verification
+if ($passwordValid) {
+    $hashedPassword = password_hash($aData['password'], PASSWORD_DEFAULT);
+    // ... prepare and execute UPDATE ...
+    if (!$stmt->execute()) {
+        // Log error but don't block login
+        LogsModel::LogError('Failed to upgrade legacy password hash', 'warning', [...]);
+    }
+}
+```
+
+**Badge Display Fix:**
+```php
+// BEFORE: Fails because DB returns strings not integers
+$user['verified'] === 1  // "1" === 1 is FALSE
+$user['locked'] === 0    // "0" === 0 is FALSE
+
+// AFTER: Loose comparison works with strings
+$user['verified'] == 1   // "1" == 1 is TRUE
+$user['locked'] == 0     // "0" == 0 is TRUE
+```
+
+#### Success Criteria
+- [x] Admin can create new users from dashboard
+- [x] Password validation enforced (strength, confirmation match)
+- [x] Email uniqueness validated
+- [x] Role assignment working
+- [x] Passwords properly hashed for new users
+- [x] SQL injection in UserModel.php fixed (8 methods)
+- [ ] SQL injection in Profile.php fixed (3 methods)
+- [ ] users.password column supports full bcrypt hashes (255 chars)
+- [ ] Password re-hashing error handling implemented
+- [ ] User list badges display correctly
+- [ ] Legacy users can still login
+- [ ] Legacy passwords auto-upgrade on successful login
+- [ ] No regression in existing functionality
+- [ ] All changes tested locally and in production
+
+#### Files Modified
+
+**Deployed (2025-12-06):**
+- `App/Models/UserModel.php` - SQL injection fixes, password hashing, email validation
+- `App/Controllers/Authentication.php` - Removed hardcoded AWS credentials
+- `App/Controllers/Dashboard/Users.php` - User creation validation
+- `App/Views/dashboard/users/add.php` - User creation form
+- `App/Views/dashboard/users/index.php` - Create User button
+
+**In Progress (2025-12-07):**
+- `App/Models/Profile.php` - SQL injection fixes (partial), password re-hashing fix
+- `App/Views/dashboard/users/index.php` - Badge display fix
+- `scripts/migrations/` (NEW) - Database migration for users.password column
+
+#### Git Commits
+- `ce9dd0b` - CRITICAL: Security fixes and user creation feature implementation (2025-12-06)
+- Pending: Fix Profile.php vulnerabilities and users.password column (2025-12-07)
+
+#### Dependencies
+- Existing users/profile table structure
+- PHP password_hash() and password_verify()
+- PDO for prepared statements
+- MySQL database access
+
+#### Blockers
+- ⚠️ **CRITICAL:** users.password column must be expanded before bcrypt password hashing works correctly
+- ⚠️ Profile.php SQL injection vulnerabilities need fixing before production deployment
+
+---
+
 ## ✅ COMPLETED TASKS
 
 ### Task #0: Initial Deployment & Security Hardening

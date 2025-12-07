@@ -35,10 +35,13 @@ class Profile extends \Core\Repository
     {
         try {
             $db = static::getDB();
-            $stmt = $db->query("SELECT * FROM users 
+            $stmt = $db->prepare("SELECT * FROM users
                                 LEFT JOIN profile ON (users.user_id = profile.user_id)
-                                WHERE users.email LIKE '%$data%' 
-                                ORDER BY users.createdAt DESC");                                  
+                                WHERE users.email LIKE :email
+                                ORDER BY users.createdAt DESC");
+            $emailParam = "%{$data}%";
+            $stmt->bindParam(':email', $emailParam, PDO::PARAM_STR);
+            $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) {
@@ -51,14 +54,16 @@ class Profile extends \Core\Repository
     {
             try {
                 $db = static::getDB();
-                $stmt = $db->query("SELECT * FROM users
+                $stmt = $db->prepare("SELECT * FROM users
                                     LEFT JOIN profile ON (users.user_id = profile.user_id)
-                                    WHERE users.user_id = $user_id");
-                   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                   return $results;                   
+                                    WHERE users.user_id = :user_id");
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $results;
             } catch (PDOException $e) {
                 echo $e->getMessage();
-            } 
+            }
     }
 
     
@@ -155,13 +160,36 @@ class Profile extends \Core\Repository
 
                 // IMPORTANT: Re-hash legacy password on successful login
                 if ($passwordValid) {
-                    $hashedPassword = password_hash($aData['password'], PASSWORD_DEFAULT);
-                    $db = static::getDB();
-                    $sql = "UPDATE users SET `password` = :password WHERE `user_id` = :user_id";
-                    $stmt = $db->prepare($sql);
-                    $stmt->bindParam(':password', $hashedPassword);
-                    $stmt->bindParam(':user_id', $profile[0]['user_id'], PDO::PARAM_INT);
-                    $stmt->execute();
+                    try {
+                        $hashedPassword = password_hash($aData['password'], PASSWORD_DEFAULT);
+                        $db = static::getDB();
+                        $sql = "UPDATE users SET `password` = :password WHERE `user_id` = :user_id";
+                        $stmt = $db->prepare($sql);
+                        $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+                        $stmt->bindParam(':user_id', $profile[0]['user_id'], PDO::PARAM_INT);
+
+                        if (!$stmt->execute()) {
+                            // Log error but don't block login
+                            LogsModel::LogError(
+                                'Failed to upgrade legacy password hash for user',
+                                'warning',
+                                [
+                                    'userId' => $profile[0]['user_id'],
+                                    'username' => $profile[0]['username'] ?? 'unknown'
+                                ]
+                            );
+                        }
+                    } catch (Exception $e) {
+                        // Log error but don't block login
+                        LogsModel::LogError(
+                            'Exception during password hash upgrade: ' . $e->getMessage(),
+                            'warning',
+                            [
+                                'userId' => $profile[0]['user_id'],
+                                'username' => $profile[0]['username'] ?? 'unknown'
+                            ]
+                        );
+                    }
                 }
             }
 

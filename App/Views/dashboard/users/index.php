@@ -75,12 +75,12 @@ use App\Models\RolesModel;
                 ?>
                   <tr>
                     <td><a href="#"><?php echo $img; ?></a></td>
-                    <td><?php echo $user['username']; ?></td>
-                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo !empty($user['username']) ? htmlspecialchars($user['username']) : htmlspecialchars($user['first_name'] ?? 'N/A'); ?></td>
+                    <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td> Last login</td>
                     <td>
-                      <?php echo $user['verified'] === 1 ? '<span class="badge bg-light-primary">Confirmed</span>' : '<span class="badge bg-light-warning">Unconfirmed</span>'; ?>
-                      <?php echo $user['locked'] === 0 ? '<span class="badge bg-light-success">Active</span>' : '<span class="badge bg-light-danger">Inactive</span>' ?>
+                      <?php echo $user['verified'] == 1 ? '<span class="badge bg-light-primary">Confirmed</span>' : '<span class="badge bg-light-warning">Unconfirmed</span>'; ?>
+                      <?php echo $user['locked'] == 0 ? '<span class="badge bg-light-success">Active</span>' : '<span class="badge bg-light-danger">Inactive</span>' ?>
                       <?php                  
                       $roles = RolesModel::getAll();
                       echo '<select class="btn" id="'.$user['user_id'].'" name="role" onchange="handleSelect(event)" value="'.$user['role_id'].'">';
