@@ -3,7 +3,6 @@
     if(!is_null($context->data))
         $data = $context->data;
 
-    use App\Models\Countries;
     use App\Models\RolesModel;
 
     $crumbs = getCrumbs();
@@ -360,21 +359,12 @@
 
                 <div class="col-md-6 mb-3">
                   <label for="province" class="form-label">Province</label>
-                  <?php
-                    $provinces = Countries::getProvinces();
-                    $provinces = array_column($provinces, 'ProvinceName', 'ProvinceID');
-                    $selectedProvince = !empty($province) ? $provinces[$province] : '';
-                  ?>
-                  <select class="form-select" name="province" id="province">
-                    <option value="">-- Select Province --</option>
-                    <?php foreach ($provinces as $id => $name):
-                      $selected = ($province == $id) ? 'selected' : '';
-                    ?>
-                      <option value="<?php echo $id; ?>" <?php echo $selected; ?>>
-                        <?php echo htmlspecialchars($name); ?>
-                      </option>
-                    <?php endforeach; ?>
-                  </select>
+                  <input type="text"
+                         class="form-control"
+                         id="province"
+                         name="province"
+                         placeholder="e.g., KwaZulu-Natal"
+                         value="<?php echo htmlspecialchars($province); ?>">
                 </div>
 
                 <div class="col-md-6 mb-3">

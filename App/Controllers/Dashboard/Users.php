@@ -10,7 +10,6 @@ namespace App\Controllers\Dashboard;
 use \Core\View;
 use App\Models\Profile;
 use App\Models\User;
-use App\Models\Countries;
 use App\Models\UserModel;
 use Aws\S3\S3Client;
 use App\Models\Roles;
