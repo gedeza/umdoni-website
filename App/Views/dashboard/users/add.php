@@ -369,26 +369,12 @@
 
                 <div class="col-md-6 mb-3">
                   <label for="city" class="form-label">City</label>
-                  <?php
-                    if (isset($province) && $province > 0) {
-                        $regions = Countries::getRegion($province);
-                        $regions = array_column($regions, 'RegionName', 'RegionID');
-                    } else {
-                        $regions = Countries::getRegions();
-                        $regions = array_column($regions, 'RegionName', 'RegionID');
-                    }
-                    $selectedRegion = !empty($city) ? $regions[$city] : '';
-                  ?>
-                  <select class="form-select" name="city" id="city">
-                    <option value="">-- Select City --</option>
-                    <?php foreach ($regions as $id => $name):
-                      $selected = ($city == $id) ? 'selected' : '';
-                    ?>
-                      <option value="<?php echo $id; ?>" <?php echo $selected; ?>>
-                        <?php echo htmlspecialchars($name); ?>
-                      </option>
-                    <?php endforeach; ?>
-                  </select>
+                  <input type="text"
+                         class="form-control"
+                         id="city"
+                         name="city"
+                         placeholder="e.g., Scottburgh, Pennington"
+                         value="<?php echo htmlspecialchars($city); ?>">
                 </div>
 
                 <div class="col-md-12 mb-3">
