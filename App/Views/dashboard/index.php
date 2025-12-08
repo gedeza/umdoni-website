@@ -210,13 +210,16 @@ $data = $context->data;
                             $profile = $data['profile'];
                             $avatar = isset($profile['location'])  ? $profile['location'] : url('assets/img/profile/pro.png');  
                             
+                    // Handle missing profile data gracefully
+                    $displayName = $profile['first_name'] ?? $profile['username'] ?? 'User';
+
                     echo '
                          <div class="avatar avatar-xl">
                         <img src="' . $avatar . '" alt="Face 1">
                     </div>
                     <div class="ms-3 name">
-                        <h5 class="font-bold">' . $profile['first_name'] . '</h5>
-                        <h6 class="text-muted mb-0">' . $profile['email'] . '</h6>
+                        <h5 class="font-bold">' . htmlspecialchars($displayName) . '</h5>
+                        <h6 class="text-muted mb-0">' . htmlspecialchars($profile['email']) . '</h6>
                     </div>
                         ';
 
