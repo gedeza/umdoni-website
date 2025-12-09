@@ -6,6 +6,17 @@ Official website for **Umdoni Local Municipality**, KwaZulu-Natal, South Africa.
 
 The Umdoni Municipality website serves as the primary digital platform for citizens, businesses, and visitors to access municipal services, information, and resources. Located in Scottburgh, Umdoni Municipality provides comprehensive online access to government services, public notices, community engagement, and administrative information.
 
+## 📚 Documentation
+
+**Complete project documentation is available in the [DOCS/](DOCS/) directory.**
+
+For comprehensive guides, deployment instructions, feature documentation, and more, see:
+- **[Documentation Index](DOCS/INDEX.md)** - Central navigation guide to all documentation
+- **[Project Status](DOCS/01-PROJECT/PROJECT-STATUS-20251208.md)** - Current project status and completed tasks
+- **[Task Tracking](DOCS/01-PROJECT/TASKS.md)** - Complete task history and specifications
+- **[SSH Access Guide](DOCS/02-DEPLOYMENT/SSH-ACCESS-GUIDE.md)** - Server access and deployment procedures
+- **[Feature Documentation](DOCS/03-FEATURES/)** - Feature-specific guides and documentation
+
 ## Features
 
 ### Public Portal
