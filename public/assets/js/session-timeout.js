@@ -5,7 +5,7 @@
  * Shows warning before logout with option to stay logged in
  *
  * Configuration:
- * - Timeout: 30 minutes (28 min idle + 2 min warning)
+ * - Timeout: 10 minutes (8 min idle + 2 min warning)
  * - Warning: 2 minutes before logout
  * - Logs: Activity log entry on auto-logout
  *
@@ -18,9 +18,9 @@
 
     // Configuration
     const CONFIG = {
-        IDLE_TIMEOUT: 28 * 60 * 1000,      // 28 minutes in milliseconds
+        IDLE_TIMEOUT: 8 * 60 * 1000,       // 8 minutes in milliseconds
         WARNING_TIMEOUT: 2 * 60 * 1000,    // 2 minutes in milliseconds
-        TOTAL_TIMEOUT: 30 * 60 * 1000,     // 30 minutes total
+        TOTAL_TIMEOUT: 10 * 60 * 1000,     // 10 minutes total
         CHECK_INTERVAL: 1000,              // Check every second
         PING_INTERVAL: 5 * 60 * 1000,      // Ping server every 5 minutes
         LOGOUT_URL: '/authentication/logout',
@@ -457,12 +457,12 @@
     function checkIdleTimeout() {
         const idleTime = getIdleTime();
 
-        // Show warning if idle for 28 minutes
+        // Show warning if idle for 8 minutes
         if (idleTime >= CONFIG.IDLE_TIMEOUT && !warningShown) {
             showWarningModal();
         }
 
-        // Auto-logout if idle for 30 minutes (should not reach here if modal works)
+        // Auto-logout if idle for 10 minutes (should not reach here if modal works)
         if (idleTime >= CONFIG.TOTAL_TIMEOUT) {
             performLogout('auto-logout');
         }
