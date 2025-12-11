@@ -96,14 +96,14 @@ class Index extends \Core\Controller
             $reason = $_POST['reason'] ?? 'unknown';
             $timestamp = $_POST['timestamp'] ?? date('Y-m-d H:i:s');
 
-            // Get user info from session (if still available)
-            $userId = $_SESSION['profile'][0]['user_id'] ?? 'unknown';
-            $username = $_SESSION['profile'][0]['username'] ?? 'Unknown User';
+            // Get user info from POST first (sent by JS before session expires), fallback to session
+            $userId = $_POST['userId'] ?? $_SESSION['profile'][0]['user_id'] ?? 'unknown';
+            $username = $_POST['username'] ?? $_SESSION['profile'][0]['username'] ?? 'Unknown User';
             $email = $_SESSION['profile'][0]['email'] ?? '';
 
             // Determine log message based on reason
             $message = match($reason) {
-                'auto-logout' => 'Automatic logout due to inactivity (30 minutes)',
+                'auto-logout' => 'Automatic logout due to inactivity (10 minutes)',
                 'manual' => 'Manual logout from timeout warning',
                 default => 'Session logout: ' . $reason
             };

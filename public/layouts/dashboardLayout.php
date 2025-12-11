@@ -78,6 +78,13 @@ include_once '../Components/Helpers.php';
     <script src="<?php echo url("themes/mazor/assets/js/pages/form-editor.js") ?>"></script>
 
     <!-- Session Timeout - Auto-logout after inactivity -->
+    <script>
+        // Pass user data to session timeout for accurate logging
+        window.sessionUserData = {
+            userId: '<?php echo $_SESSION["profile"][0]["user_id"] ?? "unknown"; ?>',
+            username: '<?php echo htmlspecialchars($_SESSION["profile"][0]["username"] ?? $_SESSION["username"] ?? "Unknown User", ENT_QUOTES, "UTF-8"); ?>'
+        };
+    </script>
     <script src="<?php echo url("assets/js/session-timeout.js") ?>"></script>
 
     </main>

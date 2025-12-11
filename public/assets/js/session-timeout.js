@@ -402,6 +402,12 @@
         data.append('reason', reason);
         data.append('timestamp', new Date().toISOString());
 
+        // Include user data (captured before session expires)
+        if (window.sessionUserData) {
+            data.append('userId', window.sessionUserData.userId || 'unknown');
+            data.append('username', window.sessionUserData.username || 'Unknown User');
+        }
+
         // Use sendBeacon for reliability (works even if page is closing)
         if (navigator.sendBeacon) {
             navigator.sendBeacon('/dashboard/index/logAutoLogout', data);
