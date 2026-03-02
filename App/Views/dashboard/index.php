@@ -258,3 +258,4 @@ $data = $context->data;
 <script>
   var service_requests = <?php echo json_encode($requests)?>
 </script>
+<script src="<?php echo url("themes/mazor/assets/js/pages/dashboard.js") ?>"></script>

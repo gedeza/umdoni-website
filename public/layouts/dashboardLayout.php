@@ -24,7 +24,6 @@ include_once '../Components/Helpers.php';
     <link rel="stylesheet" href="<?php echo url("themes/mazor/assets/vendors/simple-datatables/style.css") ?>">
     <script src="<?php echo url("assets/js/jquery.min.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/toastify/toastify.js") ?>"></script>
-    <script src="<?php echo url("themes/mazor/assets/js/extensions/toastify.js") ?>"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
@@ -55,9 +54,7 @@ include_once '../Components/Helpers.php';
     <script src="<?php echo url("themes/mazor/assets/js/bootstrap.bundle.min.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/js/mazer.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/apexcharts/apexcharts.js") ?>"></script>
-    <script src="<?php echo url("themes/mazor/assets/js/pages/dashboard.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/simple-datatables/simple-datatables.js") ?>"></script>
-    <script src="<?php echo url("themes/mazor/assets/js/extensions/sweetalert2.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/sweetalert2/sweetalert2.all.min.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/tinymce/tinymce.min.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/tinymce/plugins/code/plugin.min.js") ?>"></script>
@@ -75,7 +72,6 @@ include_once '../Components/Helpers.php';
             let dataTable = new simpleDatatables.DataTable(table1);
         }
     </script>
-    <script src="<?php echo url("themes/mazor/assets/js/pages/form-editor.js") ?>"></script>
 
     <!-- Session Timeout - Auto-logout after inactivity -->
     <script>
