@@ -175,7 +175,7 @@ $sidebarItems = [
         $sidebarItemActive = '';
         $subItems = $link->subItems;
         foreach ($subItems as $value) {
-          if ($crumbs[1] == strtolower($value->label))
+          if (isset($crumbs[1]) && strpos($value->url, '/' . $crumbs[1] . '/') !== false)
             $sidebarItemActive = 'active';
         }
 
@@ -191,8 +191,7 @@ $sidebarItems = [
         echo ' <ul class="submenu  ' . $sidebarItemActive . ' ">';
 
         foreach ($subItems as $key => $subItem) {
-          $page = strtolower($subItem->label);
-          if ($page == $crumbs[1])
+          if (isset($crumbs[1]) && strpos($subItem->url, '/' . $crumbs[1] . '/') !== false)
             $submenuItemActive = 'active';
           else
             $submenuItemActive = '';

@@ -53,6 +53,13 @@ include_once '../Components/Helpers.php';
     <script src="<?php echo url("themes/mazor/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/js/bootstrap.bundle.min.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/js/mazer.js") ?>"></script>
+    <script>
+        // Safety net: prevent mazer.js scrollIntoView error if no active sidebar item
+        if (!document.querySelector('.sidebar-item.active')) {
+            var firstItem = document.querySelector('.sidebar-item');
+            if (firstItem) firstItem.classList.add('active');
+        }
+    </script>
     <script src="<?php echo url("themes/mazor/assets/vendors/apexcharts/apexcharts.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/simple-datatables/simple-datatables.js") ?>"></script>
     <script src="<?php echo url("themes/mazor/assets/vendors/sweetalert2/sweetalert2.all.min.js") ?>"></script>
