@@ -153,18 +153,35 @@ Local testing attempted on 2026-06-13 but blocked by database connection issue:
 ## TASK 2: SQL Injection Fixes (CRITICAL SECURITY)
 
 **Priority:** CRITICAL
-**Status:** Pending
+**Status:** Completed (2026-06-13)
 **Description:** Replace all raw string interpolation in SQL queries with PDO prepared statements.
 
-| # | File | Issue | Status |
-|---|------|-------|--------|
-| 2.1 | `App/Models/ProjectsModel.php:45` | `WHERE id = '$id'` — direct interpolation | [ ] |
-| 2.2 | `App/Models/ProjectsModel.php:115` | INSERT with `$data[title]` etc. — direct interpolation | [ ] |
-| 2.3 | `App/Models/CouncillorModel.php:76` | Unsafe query with direct variable | [ ] |
-| 2.4 | `App/Models/CouncillorModel.php:88` | Unsafe query with direct variable | [ ] |
-| 2.5 | `App/Models/CouncillorModel.php:101` | Unsafe query with direct variable | [ ] |
-| 2.6 | `App/Models/Profile.php:74` | INSERT with `$data[name]`, `$data[email]` etc. | [ ] |
-| 2.7 | `App/Models/AgendaModel.php` | Multiple unsafe queries | [ ] |
+### Summary
+Fixed 17 SQL injection vulnerabilities across 4 model files by replacing direct string interpolation with PDO prepared statements and parameter binding.
+
+| # | File | Method | Status |
+|---|------|--------|--------|
+| 2.1 | `App/Models/ProjectsModel.php` | `getById()` | [x] |
+| 2.2 | `App/Models/ProjectsModel.php` | `Save()` | [x] |
+| 2.3 | `App/Models/ProjectsModel.php` | `Delete()` | [x] |
+| 2.4 | `App/Models/ProjectsModel.php` | `Restore()` | [x] |
+| 2.5 | `App/Models/CouncillorModel.php` | `getCouncillorById()` | [x] |
+| 2.6 | `App/Models/CouncillorModel.php` | `getExcoById()` | [x] |
+| 2.7 | `App/Models/CouncillorModel.php` | `getSeniorManById()` | [x] |
+| 2.8 | `App/Models/CouncillorModel.php` | `Save()` | [x] |
+| 2.9 | `App/Models/CouncillorModel.php` | `Delete()` | [x] |
+| 2.10 | `App/Models/CouncillorModel.php` | `DeleteMan()` | [x] |
+| 2.11 | `App/Models/CouncillorModel.php` | `DeleteExco()` | [x] |
+| 2.12 | `App/Models/Profile.php` | `Save()` | [x] |
+| 2.13 | `App/Models/AgendaModel.php` | `GetById()` | [x] |
+| 2.14 | `App/Models/AgendaModel.php` | `Save()` | [x] |
+| 2.15 | `App/Models/AgendaModel.php` | `Update()` | [x] |
+| 2.16 | `App/Models/AgendaModel.php` | `Delete()` | [x] |
+| 2.17 | `App/Models/AgendaModel.php` | `Restore()` | [x] |
+
+### Commit
+- **Hash:** `f83f428`
+- **Date:** 2026-06-13
 
 ---
 
@@ -385,7 +402,10 @@ Add a row of stat cards above the table showing counts for the current filter: t
 
 | Date | Commit | Description |
 |------|--------|-------------|
-| 2026-06-13 | pending | Homepage: Combined Tenders & Quotations card with dual buttons |
+| 2026-06-13 | `f83f428` | Security: Fix 17 SQL injection vulnerabilities in 4 model files |
+| 2026-06-13 | `919057d` | Fix: Restore natural card heights with smaller description text |
+| 2026-06-13 | `b590dde` | Fix: Equal height cards on homepage (kept on production) |
+| 2026-06-13 | `091df4d` | Feat: Combined Tenders & Quotations card with dual buttons |
 | 2026-03-03 | `896c562` | Dashboard Activity Logging — 70 logActivity() calls across 20 controllers |
 | 2026-03-02 | `61dac7d` | Fix JS console errors + strip_tags null on tenders/quotations |
 | 2026-03-02 | `ffe9acb` | Fix sidebar active detection for multi-word menu labels |
