@@ -1,5 +1,5 @@
 # Umdoni Municipality Website - Task Tracker
-**Last Updated:** 2026-03-03
+**Last Updated:** 2026-06-13
 **Owner:** Nhlanhla Mnyandu (nhlanhla@isutech.co.za)
 **Branch:** main
 
@@ -9,6 +9,94 @@
 - [ ] Pending
 - [x] Completed
 - [~] In Progress
+
+---
+
+## TASK 0: Homepage Tenders & Quotations Card Enhancement (UI REQUEST)
+
+**Priority:** HIGH (Immediate)
+**Status:** Code Complete — Awaiting Deployment
+**Requested By:** uMdoni Technical Personnel
+**Date:** 2026-06-13
+
+### Description
+The public homepage previously had a "Tenders" card that only linked to the Tenders page. Technical personnel requested that Quotations also be accessible from the same card, as users couldn't easily find quotations.
+
+### Solution Implemented
+Transformed the single "Tenders" card into a combined "Tenders & Quotations" card with dual action buttons.
+
+### Changes Made
+| # | Change | File | Status |
+|---|--------|------|--------|
+| 0.1 | Rename card title to "Tenders & Quotations" | `App/Views/index/index.php:58` | [x] |
+| 0.2 | Update description text | `App/Views/index/index.php:59` | [x] |
+| 0.3 | Change icon from `bi-gear` to `bi-file-earmark-text` | `App/Views/index/index.php:56` | [x] |
+| 0.4 | Remove single anchor wrapper | `App/Views/index/index.php` | [x] |
+| 0.5 | Add two side-by-side buttons (Tenders, Quotations) | `App/Views/index/index.php:60-63` | [x] |
+| 0.6 | Deploy to production | Manual | [ ] |
+| 0.7 | Verify on live site | Manual | [ ] |
+
+### Code Change Summary
+**File:** `App/Views/index/index.php` (lines 52-66)
+
+**Before:**
+```php
+<a href="<?php echo buildurl("tenders/index") ?>">
+    <div class="card card-hover mb-3 card-border">
+        <div class="card-body">
+            <div class="text-center m-2">
+                <i class="bi bi-gear fs-1 text-yellow"></i>
+            </div>
+            <p class="h5 my-3 fw-bold text-blue text-center ">Tenders</p>
+            <p class="card-text text-secondary text-center">Explore curated tender opportunities from various industries.</p>
+        </div>
+    </div>
+</a>
+```
+
+**After:**
+```php
+<div class="card card-hover mb-3 card-border">
+    <div class="card-body">
+        <div class="text-center m-2">
+            <i class="bi bi-file-earmark-text fs-1 text-yellow"></i>
+        </div>
+        <p class="h5 my-3 fw-bold text-blue text-center">Tenders & Quotations</p>
+        <p class="card-text text-secondary text-center">Access municipal tenders and quotation requests.</p>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+            <a href="<?php echo buildurl("tenders/index") ?>" class="btn btn-sm btn-primary">Tenders</a>
+            <a href="<?php echo buildurl("quotations/index") ?>" class="btn btn-sm btn-outline-primary">Quotations</a>
+        </div>
+    </div>
+</div>
+```
+
+### Visual Result
+```
+┌─────────────────────────────┐
+│         📄 (icon)           │
+│   Tenders & Quotations      │
+│  Access municipal tenders   │
+│  and quotation requests.    │
+│                             │
+│  [Tenders]   [Quotations]   │
+│   (solid)    (outline)      │
+└─────────────────────────────┘
+```
+
+### Local Testing Note
+Local testing attempted on 2026-06-13 but blocked by database connection issue:
+- Error: `Access denied for user 'umdonigov_admin'@'41.121.39.26'`
+- Cause: Production MySQL server only allows connections from whitelisted IPs
+- Local IP (41.121.39.26) is not whitelisted on production database
+- **Resolution:** Deploy directly to production since change is purely UI (no backend/database changes)
+
+### Deployment
+- **Method:** Manual upload via cPanel or SCP
+- **File to deploy:** `App/Views/index/index.php`
+- **No database changes required**
+- **No new dependencies**
+- **Rollback:** Revert the single file if needed
 
 ---
 
@@ -297,7 +385,8 @@ Add a row of stat cards above the table showing counts for the current filter: t
 
 | Date | Commit | Description |
 |------|--------|-------------|
-| 2026-03-03 | pending | Dashboard Activity Logging — 70 logActivity() calls across 20 controllers |
+| 2026-06-13 | pending | Homepage: Combined Tenders & Quotations card with dual buttons |
+| 2026-03-03 | `896c562` | Dashboard Activity Logging — 70 logActivity() calls across 20 controllers |
 | 2026-03-02 | `61dac7d` | Fix JS console errors + strip_tags null on tenders/quotations |
 | 2026-03-02 | `ffe9acb` | Fix sidebar active detection for multi-word menu labels |
 

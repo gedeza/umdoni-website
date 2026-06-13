@@ -50,17 +50,19 @@ $data = $context->data;
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("tenders/index") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
-                        <div class="text-center m-2">
-                            <i class="bi bi-gear fs-1 text-yellow"></i>
-                        </div>
-                        <p class="h5 my-3 fw-bold text-blue text-center ">Tenders</p>
-                        <p class="card-text text-secondary text-center">Explore curated tender opportunities from various industries.</p>
+            <div class="card card-hover mb-3 card-border">
+                <div class="card-body">
+                    <div class="text-center m-2">
+                        <i class="bi bi-file-earmark-text fs-1 text-yellow"></i>
+                    </div>
+                    <p class="h5 my-3 fw-bold text-blue text-center">Tenders & Quotations</p>
+                    <p class="card-text text-secondary text-center">Access municipal tenders and quotation requests.</p>
+                    <div class="d-flex justify-content-center gap-2 mt-3">
+                        <a href="<?php echo buildurl("tenders/index") ?>" class="btn btn-sm btn-primary">Tenders</a>
+                        <a href="<?php echo buildurl("quotations/index") ?>" class="btn btn-sm btn-outline-primary">Quotations</a>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-12">
