@@ -1,5 +1,6 @@
 # Umdoni Municipality Website - Task Tracker
 **Last Updated:** 2026-06-13
+**Related Proposal:** [Security & Performance Enhancement Proposal](./03-PROPOSALS/security-performance-enhancement-proposal.md)
 **Owner:** Nhlanhla Mnyandu (nhlanhla@isutech.co.za)
 **Branch:** main
 
