@@ -21,10 +21,10 @@ $data = $context->data;
 <div class="container" id="Services">
     <div class="row content-section">
 
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("services/request") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("services/request") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
                         <div class="text-center m-2">
                             <i class="bi bi-people fs-1 text-yellow"></i>
                         </div>
@@ -35,29 +35,29 @@ $data = $context->data;
             </a>
         </div>
 
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("departments/index") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("departments/index") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
                         <div class="text-center m-2">
                             <i class="bi bi-clipboard-data fs-1 text-yellow"></i>
                         </div>
-                        <p class="h5 my-3 fw-bold text-blue  text-center ">Municipal Departments</p>
+                        <p class="h5 my-3 fw-bold text-blue text-center">Municipal Departments</p>
                         <p class="card-text text-secondary text-center">Contacts for the municipal officials and departments.</p>
                     </div>
                 </div>
             </a>
         </div>
 
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <div class="card card-hover mb-3 card-border">
-                <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <div class="card card-hover mb-3 card-border h-100 w-100">
+                <div class="card-body d-flex flex-column">
                     <div class="text-center m-2">
                         <i class="bi bi-file-earmark-text fs-1 text-yellow"></i>
                     </div>
                     <p class="h5 my-3 fw-bold text-blue text-center">Tenders & Quotations</p>
                     <p class="card-text text-secondary text-center">Access municipal tenders and quotation requests.</p>
-                    <div class="d-flex justify-content-center gap-2 mt-3">
+                    <div class="d-flex justify-content-center gap-2 mt-auto pt-3">
                         <a href="<?php echo buildurl("tenders/index") ?>" class="btn btn-sm btn-primary">Tenders</a>
                         <a href="<?php echo buildurl("quotations/index") ?>" class="btn btn-sm btn-outline-primary">Quotations</a>
                     </div>
@@ -65,14 +65,14 @@ $data = $context->data;
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("services/meetings") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("services/meetings") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
                         <div class="text-center mx-2">
                             <i class="bi bi-calendar2-date fs-1 text-yellow"></i>
                         </div>
-                        <p class="h5 my-3 fw-bold text-blue text-center ">Meetings and Agendas</p>
+                        <p class="h5 my-3 fw-bold text-blue text-center">Meetings and Agendas</p>
                         <p class="card-text text-secondary text-center">Municipal council and commitee meetings and agendas.</p>
                     </div>
                 </div>
@@ -129,21 +129,21 @@ $data = $context->data;
 <div class="container content-section " id="Calendar">
     <p class="text-left h1 fw-bold text-yellow text-uppercase pb-2">CALENDAR & EVENTS</p>
     <div class="row mt-5 text-center">
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("projects/index") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
-                        <i class="bi bi-tools fs-1 m-3 text-yellow "></i>
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("projects/index") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
+                        <i class="bi bi-tools fs-1 m-3 text-yellow"></i>
                         <p class="h5 fw-bold text-blue">Projects</p>
-                        <p class="fw-normal p-1 text-secondary"> Popular City Services like trash pickup & graffiti removal</p>
+                        <p class="fw-normal p-1 text-secondary">Popular City Services like trash pickup & graffiti removal</p>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("events/index") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("events/index") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
                         <i class="bi bi-chat-quote fs-1 m-3 text-yellow"></i>
                         <p class="h5 fw-bold text-blue">Events</p>
                         <p class="fw-normal p-1 text-secondary">Contacts of the Municipal officials & departments</p>
@@ -151,10 +151,10 @@ $data = $context->data;
                 </div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("notices/index") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("notices/index") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
                         <i class="bi bi-info-circle fs-1 m-3 text-yellow"></i>
                         <p class="h5 fw-bold text-blue">Notices</p>
                         <p class="fw-normal p-1 text-secondary">For notices, announcements and more</p>
@@ -162,10 +162,10 @@ $data = $context->data;
                 </div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            <a href="<?php echo buildurl("documents/index") ?>">
-                <div class="card card-hover mb-3 card-border">
-                    <div class="card-body">
+        <div class="col-lg-3 col-md-3 col-sm-12 d-flex">
+            <a href="<?php echo buildurl("documents/index") ?>" class="w-100">
+                <div class="card card-hover mb-3 card-border h-100">
+                    <div class="card-body d-flex flex-column">
                         <i class="bi bi-journals fs-1 text-yellow"></i>
                         <p class="h5 fw-bold text-blue">Documents Library</p>
                         <p class="fw-normal p-1 text-secondary">Access important documents related to Umdoni Municipality.</p>
