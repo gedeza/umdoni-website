@@ -69,11 +69,18 @@ class Profile extends \Core\Repository
     
     public static function Save($data)
     {
-        $db = static::getDB(); 
-        $sql = "INSERT into profile ( name, email, message, created_date, status) 
-                VALUES ( '$data[name]', '$data[email]','$data[message]' , now() , 1)";
-        $stmt = $db->exec($sql);
-        return $stmt;
+        $db = static::getDB();
+        $sql = "INSERT INTO profile (name, email, message, created_date, status)
+                VALUES (:name, :email, :message, now(), 1)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':message', $data['message']);
+
+        if ($stmt->execute()) {
+            return $db->lastInsertId();
+        }
+        return false;
     }
 
 

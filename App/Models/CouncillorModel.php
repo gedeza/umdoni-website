@@ -73,7 +73,9 @@ class CouncillorModel extends \Core\Repository
     {
         try {
             $db = static::getDB();
-            $stmt = $db->query("SELECT * FROM councillors WHERE id = $id");
+            $stmt = $db->prepare("SELECT * FROM councillors WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) {
@@ -85,7 +87,9 @@ class CouncillorModel extends \Core\Repository
     {
         try {
             $db = static::getDB();
-            $stmt = $db->query("SELECT * FROM exco WHERE id = $id");
+            $stmt = $db->prepare("SELECT * FROM exco WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) {
@@ -98,7 +102,9 @@ class CouncillorModel extends \Core\Repository
     {
         try {
             $db = static::getDB();
-            $stmt = $db->query("SELECT * FROM seniors WHERE id = $id");
+            $stmt = $db->prepare("SELECT * FROM seniors WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) {
@@ -113,11 +119,25 @@ class CouncillorModel extends \Core\Repository
         $db = static::getDB();
         if (!isset($data['id'])) $data['id'] = 0;
 
-        $sql = "INSERT into councillors ( `name`,`middlename`,`surname`, `email`, `telephone`, `title`,`category`, `ward`, `img_file`, `location`,`isActive`)
-                VALUES ('$data[name]','$data[middlename]','$data[surname]','$data[email]','$data[telephone]','$data[title]','$data[category]','$data[ward]','$data[img_file]','$data[location]','$data[isActive]')";
-        $stmt = $db->exec($sql);
+        $sql = "INSERT INTO councillors (`name`, `middlename`, `surname`, `email`, `telephone`, `title`, `category`, `ward`, `img_file`, `location`, `isActive`)
+                VALUES (:name, :middlename, :surname, :email, :telephone, :title, :category, :ward, :img_file, :location, :isActive)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':middlename', $data['middlename']);
+        $stmt->bindParam(':surname', $data['surname']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':telephone', $data['telephone']);
+        $stmt->bindParam(':title', $data['title']);
+        $stmt->bindParam(':category', $data['category']);
+        $stmt->bindParam(':ward', $data['ward']);
+        $stmt->bindParam(':img_file', $data['img_file']);
+        $stmt->bindParam(':location', $data['location']);
+        $stmt->bindParam(':isActive', $data['isActive']);
 
-        return $stmt;
+        if ($stmt->execute()) {
+            return $db->lastInsertId();
+        }
+        return false;
     }
 
 
@@ -390,26 +410,29 @@ class CouncillorModel extends \Core\Repository
     public static function Delete($id)
     {
         $db = static::getDB();
-        $sql = "UPDATE  councillors SET `isActive` = 0 WHERE `id` = $id";
-        $stmt = $db->exec($sql);
-        return $stmt;
+        $sql = "UPDATE councillors SET `isActive` = 0 WHERE `id` = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
     public static function DeleteMan($id)
     {
         $db = static::getDB();
-        $sql = "UPDATE   seniors SET `isActive` = 0 WHERE `id` = $id";
-        $stmt = $db->exec($sql);
-        return $stmt;
+        $sql = "UPDATE seniors SET `isActive` = 0 WHERE `id` = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
 
     public static function DeleteExco($id)
     {
         $db = static::getDB();
-        $sql = "UPDATE   exco SET `isActive` = 0 WHERE `id` = $id";
-        $stmt = $db->exec($sql);
-        return $stmt;
+        $sql = "UPDATE exco SET `isActive` = 0 WHERE `id` = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
     public static function getType()

@@ -41,8 +41,9 @@ class ProjectsModel extends \Core\Repository
     {
         try {
             $db = static::getDB();
-            $stmt = $db->query("SELECT * FROM projects 
-                                WHERE id = '$id'");                                  
+            $stmt = $db->prepare("SELECT * FROM projects WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             $results = $stmt->fetch(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) {
@@ -109,30 +110,40 @@ class ProjectsModel extends \Core\Repository
     {
         global $context;
 
-        $db = static::getDB(); 
-        
-        $sql = "INSERT into projects (title, subtitle, body, isActive, createdAt, location , updatedAt, updatedBy)
-                VALUES ('$data[title]','$data[subtitle]','$data[body]','1', '$data[createdAt]', '$data[location]' , 0,'rakheoana')"; 
-        $stmt = $db->exec($sql);
-        
-       return $stmt;
+        $db = static::getDB();
+
+        $sql = "INSERT INTO projects (title, subtitle, body, isActive, createdAt, location, updatedAt, updatedBy)
+                VALUES (:title, :subtitle, :body, '1', :createdAt, :location, 0, 'rakheoana')";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':title', $data['title']);
+        $stmt->bindParam(':subtitle', $data['subtitle']);
+        $stmt->bindParam(':body', $data['body']);
+        $stmt->bindParam(':createdAt', $data['createdAt']);
+        $stmt->bindParam(':location', $data['location']);
+
+        if ($stmt->execute()) {
+            return $db->lastInsertId();
+        }
+        return false;
     }
 
 
     public static function Delete($id)
     {
-        $db = static::getDB(); 
-        $sql = "UPDATE  projects SET `isActive` = 0 WHERE `id` = $id"; 
-        $stmt = $db->exec($sql);
-       return $stmt;
+        $db = static::getDB();
+        $sql = "UPDATE projects SET `isActive` = 0 WHERE `id` = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
     public static function Restore($id)
     {
-        $db = static::getDB(); 
-        $sql = "UPDATE  projects SET `isActive` = 1 WHERE `id` = $id"; 
-        $stmt = $db->exec($sql);
-       return $stmt;
+        $db = static::getDB();
+        $sql = "UPDATE projects SET `isActive` = 1 WHERE `id` = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
 }
