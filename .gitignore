@@ -62,3 +62,6 @@ phpunit.md
 # Large asset files
 public/assets/css/bootstrap/
 public/assets/dist/
+
+# ISU console upload artifact (regenerable, upload via cPanel File Manager)
+deployment/isu-console-patch/isu-console-upload.zip
