@@ -1,0 +1,9 @@
+# Deny all web access to runtime state (kill-switch flag, staged patches,
+# patch backups). These are internal files, never served to browsers.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
