@@ -29,6 +29,9 @@ error_log
 cache/
 *.cache
 
+# ISU console runtime state (kill-switch flag is runtime-only, never commit)
+/storage/site-suspended.flag
+
 # Temporary files
 tmp/
 temp/

@@ -94,12 +94,29 @@ $router->add('{controller}/{id:\d+}/{action}');
 $router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
 $router->add('dashboard/{controller}/{action}', ['namespace' => 'Dashboard']);
 $router->add('dashboard/{controller}/{action}/{id:\d+}', ['namespace' => 'Dashboard']);
+$router->add('isu/{controller}/{action}', ['namespace' => 'Isu']);
 
 // Handle both Apache and PHP built-in server
 $url = $_SERVER['QUERY_STRING'] ?? '';
 global $context;
 if (!isset($context) && empty($context)) {    // call the class
     $context = new Context('', '', '', '');
+}
+
+/**
+ * Provider (ISU) service kill-switch enforcement.
+ *
+ * When the site is suspended (flag file present), every request returns a
+ * neutral 503 "service unavailable" page — EXCEPT the /isu console itself,
+ * so ISU Technologies can always restore service. See App\Models\SiteControl.
+ */
+$routePath  = strtok($url, '&');
+$isIsuRoute = ($routePath === 'isu' || strncmp((string) $routePath, 'isu/', 4) === 0);
+if (!$isIsuRoute && \App\Models\SiteControl::isSuspended()) {
+    http_response_code(503);
+    header('Retry-After: 3600');
+    require dirname(__DIR__) . '/App/Views/errors/service-unavailable.php';
+    die();
 }
 
 $router->dispatch($url);
