@@ -53,7 +53,7 @@ $e = function ($v) {
                 <p class="mb-4">The public website and municipal dashboard are currently offline.
                     Visitors see a neutral “service unavailable” page.</p>
 
-                <form method="post" action="<?php echo url('isu/console/restore'); ?>"
+                <form method="post" action="<?php echo buildurl('isu/console/restore'); ?>"
                       onsubmit="return confirm('Bring the site back online now?');">
                     <input type="hidden" name="csrf_token" value="<?php echo $e($csrf_token); ?>">
                     <div class="mb-3">
@@ -68,7 +68,7 @@ $e = function ($v) {
                     admins a neutral “service temporarily unavailable — contact uMdoni technical
                     staff” page. This console stays reachable so you can restore service.</p>
 
-                <form method="post" action="<?php echo url('isu/console/suspend'); ?>"
+                <form method="post" action="<?php echo buildurl('isu/console/suspend'); ?>"
                       onsubmit="return confirm('This will take the ENTIRE site offline. Continue?');">
                     <input type="hidden" name="csrf_token" value="<?php echo $e($csrf_token); ?>">
                     <div class="mb-3">

@@ -19,7 +19,7 @@ $e = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); 
     <div class="alert alert-danger py-2"><?php echo $e($error); ?></div>
 <?php endif; ?>
 
-<form method="post" action="<?php echo url('isu/auth/changepassword'); ?>" autocomplete="off">
+<form method="post" action="<?php echo buildurl('isu/auth/changepassword'); ?>" autocomplete="off">
     <input type="hidden" name="csrf_token" value="<?php echo $e($csrf); ?>">
     <div class="mb-3">
         <label class="form-label">Current password</label>

@@ -31,7 +31,7 @@
     <nav class="isu-topbar py-3 mb-4">
         <div class="container d-flex justify-content-between align-items-center">
             <span class="isu-brand">ISU&nbsp;Technologies <span class="badge bg-success isu-badge align-middle">Provider Console</span></span>
-            <a class="btn btn-sm btn-outline-light" href="<?php echo url('isu/auth/logout'); ?>">Sign out</a>
+            <a class="btn btn-sm btn-outline-light" href="<?php echo buildurl('isu/auth/logout'); ?>">Sign out</a>
         </div>
     </nav>
     <div class="container pb-5">
