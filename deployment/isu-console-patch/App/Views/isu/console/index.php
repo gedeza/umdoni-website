@@ -1,9 +1,24 @@
 <?php
 /**
  * ISU Console — service control dashboard.
- * Vars: $suspended, $info, $history, $csrf_token, $isuUser, $flash
+ *
+ * This framework passes controller data through the global $context->data
+ * array (not as extracted local variables), so read it the same way the
+ * dashboard views do.
  */
-$e = fn($v) => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+global $context;
+$data = $context->data;
+
+$suspended  = $data['suspended']  ?? false;
+$info       = $data['info']       ?? [];
+$history    = $data['history']    ?? [];
+$csrf_token = $data['csrf_token'] ?? '';
+$isuUser    = $data['isuUser']    ?? [];
+$flash      = $data['flash']      ?? null;
+
+$e = function ($v) {
+    return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+};
 ?>
 
 <?php if (!empty($flash)): ?>
