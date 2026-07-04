@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>Service Temporarily Unavailable | Umdoni Municipality</title>
+    <title>Site Temporarily Unavailable | Umdoni Municipality</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -28,13 +28,12 @@
 <body>
     <div class="card">
         <div class="icon">🛠️</div>
-        <h1>Service Temporarily Unavailable</h1>
-        <p>The Umdoni Municipality website is currently offline for maintenance.</p>
-        <p>We apologise for the inconvenience. Please check back shortly.</p>
+        <h1>Site Temporarily Unavailable</h1>
+        <p>This website is temporarily down.</p>
         <div class="contact">
-            <p>For urgent enquiries, please contact<br><strong>uMdoni technical staff</strong>.</p>
+            <p>Please contact <strong>uMdoni support</strong> for assistance.</p>
         </div>
-        <p class="muted">Umdoni Local Municipality</p>
+        <p class="muted">We'll be back shortly.</p>
     </div>
 </body>
 </html>
