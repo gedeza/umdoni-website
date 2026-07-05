@@ -1,5 +1,5 @@
 # Umdoni Municipality Website - Task Tracker
-**Last Updated:** 2026-06-13
+**Last Updated:** 2026-07-05
 **Related Proposal:** [Security & Performance Enhancement Proposal](./03-PROPOSALS/security-performance-enhancement-proposal.md)
 **Owner:** Nhlanhla Mnyandu (nhlanhla@isutech.co.za)
 **Branch:** main
@@ -399,10 +399,84 @@ Add a row of stat cards above the table showing counts for the current filter: t
 
 ---
 
+## TASK 15: ISU Console — Work / Engagement Tracker
+
+**Priority:** MEDIUM
+**Status:** [ ] Pending (planned — to build another day)
+**Owner:** Nhlanhla Mnyandu (nhlanhla@isutech.co.za)
+**Date logged:** 2026-07-05
+
+### Context
+The ISU Console (provider-only control panel at `/isu/…`) is now live with:
+Home dashboard, Support/ticketing, Site Control (kill-switch), ISU Admins,
+Database (backups + migration runner), Deploy (patch tool), Help, and it is an
+installable PWA. New features now deploy **through the console** — code via the
+Deploy tool, DB via a migration file in `/migrations` run from the Database page.
+No cPanel needed.
+
+This task adds the last planned piece: a **lightweight work/engagement tracker**
+so the console reflects proposed and ongoing uMdoni work, not just server controls.
+
+### Scope
+A new **"Work"** tab (ISU-only), consistent with the existing modules
+(dark theme, `page_title`/`page_desc` header, CSRF, IsuAudit logging).
+
+| # | Step | File(s) | Status |
+|---|------|---------|--------|
+| 15.1 | Migration: `isu_engagements` table (title, description, status, value R, proposal_ref, start_date, target_date, notes, timestamps) | `migrations/2026-xx-xx-isu-engagements.sql` | [ ] |
+| 15.2 | `IsuEngagement` model — list/create/update/getById, counts by status (prepared statements) | `App/Models/IsuEngagement.php` | [ ] |
+| 15.3 | `Work` controller — index (list + filters), create, update, view | `App/Controllers/Isu/Work.php` | [ ] |
+| 15.4 | Views — list + add/edit form; status badges (Proposed/Approved/In Progress/On Hold/Completed/Cancelled) | `App/Views/isu/work/*.php` | [ ] |
+| 15.5 | Nav item **"Work"** + dashboard **"Active work"** card | `public/layouts/isuLayout.php`, `App/Controllers/Isu/Home.php`, `App/Views/isu/home/index.php` | [ ] |
+| 15.6 | Help guide for the Work tab | `App/Views/isu/help/index.php` | [ ] |
+| 15.7 | **Seed the three existing proposals** (below) as engagements | migration or console | [ ] |
+| 15.8 | Package patch ZIP + deploy via Deploy tool; run migration via Database page | — | [ ] |
+
+### Proposals to seed (from `DOCS/03-PROPOSALS/`)
+| Title | Value | Status | Source file |
+|-------|-------|--------|-------------|
+| Website Security & Performance Enhancement | R49,600 (62h) | Proposed | `security-performance-enhancement-proposal.md` |
+| Enhanced Backup & Security Hardening (off-site) | TBC | Proposed | `enhanced-backup-system-proposal.md` |
+| Municipal Policies Management System | R67,200 (84h) | Proposed | `Municipal-Policies-System-Proposal.md` (under `DOCS/proposals/`) |
+
+### Notes
+- ISU-only for now (matches the ticketing decision); a uMdoni-facing view can come later.
+- Later enhancement: link an unpaid/overdue engagement to the Site Control kill-switch.
+
+---
+
+## TASK 16: ISU Console — Payment Due-Date Automation (Backlog)
+
+**Priority:** LOW–MEDIUM
+**Status:** [ ] Pending (backlog — on hold since 2026-07-04)
+**Date logged:** 2026-07-05
+
+### Scope
+Automate the annual hosting/SLA renewal reminder + (optional) auto-suspend, tying
+into Site Control. uMdoni renewal is a routine **annual** event (invoice already
+submitted) — keep it courteous, never a surprise.
+
+| # | Step | Status |
+|---|------|--------|
+| 16.1 | Record renewal due-date + invoice ref/amount/status (extend engagement or a settings row) | [ ] |
+| 16.2 | Dashboard: show renewal status (due / overdue / paid) | [ ] |
+| 16.3 | Optional staged reminder before any suspension | [ ] |
+| 16.4 | Optional auto-suspend on overdue (with the soft public page already built) | [ ] |
+
+---
+
 ## Completed Work Log
 
 | Date | Commit | Description |
 |------|--------|-------------|
+| 2026-07-05 | `af8300f` | ISU Console PWA — installable mobile app (manifest, icons, service worker) |
+| 2026-07-05 | `536f637` | ISU Console Phase 5 — Support / ticketing (ISU-only) |
+| 2026-07-05 | `21769b3` | ISU Console UX overhaul — dashboard, icon nav, page headers, Help & Guides |
+| 2026-07-05 | `1213b5a` | ISU Console Phase 4 — constrained patch-ZIP deploy tool + rollback |
+| 2026-07-05 | `c9cac1c` | ISU Console Phase 3 — DB tools (backups + migration runner) |
+| 2026-07-04 | `a47120d` | ISU Console Phase 2 — ISU admin user management |
+| 2026-07-04 | `0fa930f` | ISU Console Phase 1 — independent ISU login (isu_admins) |
+| 2026-07-04 | `c7f13a3` | ISU Console — provider kill-switch (Site Control) + soft public page |
 | 2026-06-13 | `f83f428` | Security: Fix 17 SQL injection vulnerabilities in 4 model files |
 | 2026-06-13 | `919057d` | Fix: Restore natural card heights with smaller description text |
 | 2026-06-13 | `b590dde` | Fix: Equal height cards on homepage (kept on production) |
