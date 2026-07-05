@@ -7,6 +7,7 @@ use App\Models\IsuAdmin;
 use App\Models\IsuBackup;
 use App\Models\IsuMigration;
 use App\Models\IsuAudit;
+use App\Models\IsuTicket;
 use Core\View;
 
 /**
@@ -41,6 +42,7 @@ class Home extends Guarded
             'last_backup'   => !empty($backups) ? $backups[0] : null,
             'backup_count'  => count($backups),
             'pending_migrations' => $pending,
+            'open_tickets'  => IsuTicket::openCount(),
             'activity'      => IsuAudit::recent(8),
             'admin_name'    => $this->isuUser['username'] ?? '',
         ], 'isu');

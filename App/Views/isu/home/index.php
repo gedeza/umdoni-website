@@ -9,6 +9,7 @@ $admins     = (int) ($data['active_admins'] ?? 0);
 $lastBackup = $data['last_backup'] ?? null;
 $backupCount = (int) ($data['backup_count'] ?? 0);
 $pending    = (int) ($data['pending_migrations'] ?? 0);
+$openTickets = (int) ($data['open_tickets'] ?? 0);
 $activity   = $data['activity'] ?? [];
 $adminName  = $data['admin_name'] ?? '';
 $e = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); };
@@ -42,6 +43,13 @@ $e = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); 
     </div>
     <div class="col-6 col-lg-3">
         <div class="isu-card p-3 h-100">
+            <div class="muted text-uppercase mb-2" style="font-size:.72rem;">Open tickets</div>
+            <div class="h5 mb-0 <?php echo $openTickets > 0 ? 'text-warning' : ''; ?>"><?php echo $openTickets; ?></div>
+            <a class="d-inline-block mt-2" style="font-size:.8rem;" href="<?php echo buildurl('isu/support/index'); ?>">Support &rarr;</a>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="isu-card p-3 h-100">
             <div class="muted text-uppercase mb-2" style="font-size:.72rem;">Active ISU admins</div>
             <div class="h5 mb-0"><?php echo $admins; ?></div>
             <a class="d-inline-block mt-2" style="font-size:.8rem;" href="<?php echo buildurl('isu/users/index'); ?>">Manage &rarr;</a>
@@ -71,6 +79,7 @@ $e = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); 
         <div class="isu-card p-4 h-100">
             <h6 class="muted text-uppercase mb-3">Quick actions</h6>
             <div class="d-grid gap-2">
+                <a class="btn btn-outline-light text-start" href="<?php echo buildurl('isu/support/index'); ?>">🎫 Log a support ticket</a>
                 <a class="btn btn-outline-light text-start" href="<?php echo buildurl('isu/console/index'); ?>">⚡ Take the site offline / restore it</a>
                 <a class="btn btn-outline-light text-start" href="<?php echo buildurl('isu/users/index'); ?>">👥 Add or manage ISU admins</a>
                 <a class="btn btn-outline-light text-start" href="<?php echo buildurl('isu/database/index'); ?>">🗄 Back up the database</a>

@@ -22,6 +22,17 @@
     <?php
     $guides = [
         [
+            'id' => 'g0', 'icon' => '🎫', 'title' => 'Support — logging & tracking tickets',
+            'body' => '<p>When uMdoni raises a request by email or phone, log it here so nothing is lost.</p>
+                <ol>
+                  <li><strong>Log a ticket:</strong> subject, description, category, priority, and who asked. It gets a
+                      reference like <code>UMD-0001</code>.</li>
+                  <li><strong>Work it:</strong> open the ticket, add replies/updates as you go, and set the status
+                      (Open &rarr; In Progress &rarr; Resolved &rarr; Closed), priority and assignee.</li>
+                  <li>The <strong>Home</strong> dashboard shows how many tickets are still open.</li>
+                </ol>',
+        ],
+        [
             'id' => 'g1', 'icon' => '⚡', 'title' => 'Site Control — taking the site offline / online',
             'body' => '<p>Use this when uMdoni\'s annual renewal is unpaid, or for planned downtime.</p>
                 <ol>

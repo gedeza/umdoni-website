@@ -16,6 +16,7 @@
 
     $isu_nav = [
         'home'     => ['label' => 'Home',         'icon' => '⌂', 'route' => 'isu/home/index'],
+        'support'  => ['label' => 'Support',       'icon' => '🎫', 'route' => 'isu/support/index'],
         'console'  => ['label' => 'Site Control', 'icon' => '⚡', 'route' => 'isu/console/index'],
         'users'    => ['label' => 'ISU Admins',   'icon' => '👥', 'route' => 'isu/users/index'],
         'database' => ['label' => 'Database',      'icon' => '🗄', 'route' => 'isu/database/index'],
