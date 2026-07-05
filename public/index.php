@@ -89,6 +89,10 @@ try {
 $router = new Core\Router();
 // Add the routes
 $router->add('', ['controller' => 'Index', 'action' => 'index']);
+// ISU console short URLs — must precede the generic {controller}/{action}
+// so /isu and /isu/console resolve to the Isu namespace (action defaults to index).
+$router->add('isu', ['namespace' => 'Isu', 'controller' => 'Console', 'action' => 'index']);
+$router->add('isu/{controller}', ['namespace' => 'Isu', 'action' => 'index']);
 $router->add('{controller}/{action}');
 $router->add('{controller}/{id:\d+}/{action}');
 $router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
