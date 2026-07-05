@@ -26,6 +26,8 @@ class Users extends Guarded
     public function indexAction()
     {
         View::render('isu/users/index.php', [
+            'page_title'  => 'ISU Admins',
+            'page_desc'   => 'Manage who can access this console. New/reset passwords are shown once.',
             'admins'      => IsuAdmin::getAll(),
             'audit'       => IsuAudit::recent(20),
             'csrf_token'  => $this->csrfToken(),

@@ -26,6 +26,8 @@ class Deploy extends Guarded
     public function indexAction()
     {
         View::render('isu/deploy/index.php', [
+            'page_title' => 'Deploy',
+            'page_desc'  => 'Upload a code patch, review it, apply it, and roll back if needed.',
             'patches'    => IsuPatch::recent(15),
             'csrf_token' => $this->csrfToken(),
             'flash'      => $this->takeFlash(),
@@ -57,6 +59,8 @@ class Deploy extends Guarded
             return;
         }
         View::render('isu/deploy/review.php', [
+            'page_title' => 'Deploy — review patch',
+            'page_desc'  => 'Check the file list below, then apply or discard.',
             'token'      => $token,
             'original'   => $_SESSION['isu_patch_original'] ?? null,
             'entries'    => $inspect['entries'],

@@ -20,6 +20,8 @@ class Console extends Guarded
     public function indexAction()
     {
         View::render('isu/console/index.php', [
+            'page_title' => 'Site Control',
+            'page_desc'  => 'Take the public website offline or bring it back online.',
             'suspended'  => SiteControl::isSuspended(),
             'info'       => SiteControl::suspensionInfo(),
             'history'    => SiteControl::history(25),

@@ -26,6 +26,8 @@ class Database extends Guarded
     public function indexAction()
     {
         View::render('isu/database/index.php', [
+            'page_title' => 'Database',
+            'page_desc'  => 'Create and download backups, and run pre-approved database migrations.',
             'backups'    => IsuBackup::all(),
             'migrations' => IsuMigration::status(),
             'csrf_token' => $this->csrfToken(),

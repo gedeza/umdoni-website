@@ -30,7 +30,7 @@ class Auth extends \Core\Controller
     public function loginAction()
     {
         if (!empty($_SESSION['isu_admin'])) {
-            redirect('isu/console/index');
+            redirect('isu/home/index');
             return;
         }
         $this->ensureCsrf();
@@ -86,7 +86,7 @@ class Auth extends \Core\Controller
         if ((int) $admin['must_change_password'] === 1) {
             redirect('isu/auth/changepassword');
         } else {
-            redirect('isu/console/index');
+            redirect('isu/home/index');
         }
     }
 
@@ -143,7 +143,7 @@ class Auth extends \Core\Controller
             $_SESSION['isu_admin']['must_change_password'] = 0;
             $_SESSION['isu_csrf'] = bin2hex(random_bytes(32));
             $this->flash('isu_pw_ok', 'Password updated.');
-            redirect('isu/console/index');
+            redirect('isu/home/index');
             return;
         }
 
