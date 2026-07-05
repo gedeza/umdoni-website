@@ -71,6 +71,15 @@
                 </ol>',
         ],
         [
+            'id' => 'g6', 'icon' => '📱', 'title' => 'Install on your phone (app)',
+            'body' => '<p>The console is an installable app — add it to your home screen for one-tap access.</p>
+                <ul>
+                  <li><strong>Android/Chrome:</strong> open the console, tap the ⋮ menu &rarr; <em>Install app</em> (or "Add to Home screen").</li>
+                  <li><strong>iPhone/Safari:</strong> tap Share &rarr; <em>Add to Home Screen</em>.</li>
+                </ul>
+                <p class="muted mb-0">It opens full-screen like a native app. You still sign in normally; it needs a connection (it is not a full offline app).</p>',
+        ],
+        [
             'id' => 'g5', 'icon' => '🔒', 'title' => 'Security & good habits',
             'body' => '<ul>
                   <li>Use a strong, unique password; you\'ll be signed out automatically after 30 minutes idle.</li>

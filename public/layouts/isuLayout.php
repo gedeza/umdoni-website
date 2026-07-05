@@ -33,6 +33,15 @@
     <meta name="robots" content="noindex, nofollow">
     <title>ISU Console | Umdoni Municipality</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PWA -->
+    <link rel="manifest" href="<?php echo url('manifest.json'); ?>">
+    <meta name="theme-color" content="#0b2545">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ISU Console">
+    <link rel="apple-touch-icon" href="<?php echo url('assets/pwa/apple-touch-icon.png'); ?>">
+    <link rel="icon" type="image/png" href="<?php echo url('assets/pwa/favicon-32.png'); ?>">
     <style>
         :root { --isu:#0b2545; --isu-accent:#12b886; }
         body { background:#0b1220; color:#e6edf3; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
@@ -93,5 +102,10 @@
 
         {{content}}
     </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('<?php echo buildurl('isu/sw'); ?>').catch(function () {});
+        }
+    </script>
 </body>
 </html>
