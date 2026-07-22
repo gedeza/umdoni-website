@@ -214,6 +214,27 @@ All deployment packages are organized here with complete instructions:
 
 ---
 
+## 📂 06-SPECIFICATIONS - Procurement Specifications
+
+**Location:** `DOCS/06-SPECIFICATIONS/`
+
+### Documents
+
+#### WEBSITE-HOSTING-MAINTENANCE-SPECIFICATION-2026.md
+**Purpose:** Draft technical & service specification for uMdoni Municipality's own use, to be issued as a public RFQ for a hosting & maintenance service provider (contract period left TBD for SCM) once the current interim (one-month) appointment ends.
+**Contents:**
+- Scope of work: hosting, maintenance, security, backup/recovery, content management
+- Current system baseline (for bidder pricing/context)
+- Service level requirements table
+- Deliverables, reporting, provider requirements, payment terms
+- Handover/transition requirements between outgoing and incoming providers
+
+**When to Use:** Reference when uMdoni SCM is preparing the public RFQ for the long-term hosting/maintenance appointment.
+
+**Status:** Draft — technical/service sections only; SCM to add procurement-process sections before public issue.
+
+---
+
 ## 📂 05-TESTING - Testing Documentation
 
 **Location:** `DOCS/05-TESTING/`
