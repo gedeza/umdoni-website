@@ -1,7 +1,7 @@
 # WEBSITE HOSTING AND MAINTENANCE SPECIFICATIONS
 ## UMDONI MUNICIPALITY
 
-### Appointment of a Service Provider for Website Hosting and Maintenance Services for a Period of [CONTRACT PERIOD — TBD BY SCM]
+### Appointment of a Service Provider for Website Hosting and Maintenance Services for a Period of 12 Months
 
 **Document status:** Draft technical & service specification, prepared for uMdoni Municipality's internal Supply Chain Management (SCM) unit to incorporate into a formal public Request for Quotation / Tender. This document covers scope, service levels, and technical requirements only; SCM-specific sections (evaluation criteria, B-BBEE scoring, mandatory compliance documents, submission instructions, closing date and venue) are to be added by the Municipality's SCM unit prior to public issue.
 
@@ -19,7 +19,7 @@ This appointment follows a short-term (one-month) interim hosting and maintenanc
 
 The appointment shall be for a period of:
 
-**[CONTRACT PERIOD — TO BE DETERMINED BY SCM]**, from date of award, with the option, at the sole discretion of the Municipality, to renew for a further period of **[RENEWAL PERIOD — TBD]**, subject to satisfactory performance and availability of budget.
+**12 (twelve) months**, from date of award, with the option, at the sole discretion of the Municipality, to renew for a further period of **[RENEWAL PERIOD — TBD]**, subject to satisfactory performance and availability of budget.
 
 The Municipality reserves the right to terminate the appointment on [NOTICE PERIOD — TBD] days' written notice, or with immediate effect for material breach, security negligence, or non-performance against the service levels in Section 4.
 
@@ -210,7 +210,3 @@ Payment shall be made monthly in arrears, upon successful delivery of that month
 
 *This document is a technical and service specification only. Procurement-process sections — evaluation and scoring criteria, functionality thresholds, B-BBEE requirements, mandatory compliance documentation (tax clearance, CSD registration, etc.), submission instructions, and closing date/venue — are to be completed by Umdoni Municipality's Supply Chain Management unit before public issue.*
 
-**Prepared with the assistance of:** ISU Tech (Nhlanhla Mnyandu) — technical input only. This document is uMdoni Municipality's own specification for a public, open RFQ process.
-
-**Draft version:** 1.0
-**Draft date:** 22 July 2026
